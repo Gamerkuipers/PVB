@@ -1,6 +1,6 @@
 <div {{ $attributes->class(['bg-primary flex']) }}>
     <div class="relative w-3/4">
-        <img src="{{ asset('images/img.png') }}" class="object-fit" alt="">
+        <img src="{{ asset('images/img.png') }}" class="object-cover h-full w-full" alt="">
         <span class="absolute bottom-0 right-0 bg-primary px-4 py-2 rounded-tl-xl font-bold text-2xl">
             €29.000,00
         </span>
@@ -18,7 +18,7 @@
             <div>
                 <x-ad.specification :title="__('Fuel')">Lorem Ipsum</x-ad.specification>
                 <x-ad.specification :title="__('BTW')">Lorem Ipsum</x-ad.specification>
-                <x-ad.specification :title="__('Transmission')">Lorem Ipsum</x-ad.specification>
+                <x-ad.specification tion :title="__('Transmission')">Lorem Ipsum</x-ad.specification>
                 <x-ad.specification :title="__('Build Year')">Lorem Ipsum</x-ad.specification>
             </div>
         </div>
