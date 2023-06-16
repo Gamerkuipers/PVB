@@ -39,17 +39,5 @@ Route::group([
    Route::get('/show', 'show')->name('show');
 });
 
-Route::group([
-    'prefix' => 'dashboard',
-    'as' => 'dashboard.'
-], function () {
-    Route::group([
-        'prefix' => 'contact',
-        'as' => 'contact.',
-        'controller' => ContactController::class
-    ], function () {
-        Route::get('show', 'show')->name('show');
-    });
-});
-
+require __DIR__.'/dashboard.php';
 require __DIR__.'/auth.php';
