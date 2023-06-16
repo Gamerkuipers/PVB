@@ -11,4 +11,9 @@ class AdController extends Controller
     {
         return view('ad.index');
     }
+
+    public function show(): View
+    {
+        return view('ad.show');
+    }
 }
