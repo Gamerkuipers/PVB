@@ -15,13 +15,16 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 flex">
-            @include('layouts.navigation-dashboard')
+        <div class="min-h-screen bg-gray-100">
+            <div class="flex min-h-screen">
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                @include('layouts.navigation-dashboard')
+
+                <!-- Page Content -->
+                <main class="w-full">
+                    {{ $slot }}
+                </main>
+            </div>
         </div>
     </body>
 </html>

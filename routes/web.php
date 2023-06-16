@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,19 @@ Route::group([
 ], function () {
    Route::get('/', 'index')->name('index');
    Route::get('/show', 'show')->name('show');
+});
+
+Route::group([
+    'prefix' => 'dashboard',
+    'as' => 'dashboard.'
+], function () {
+    Route::group([
+        'prefix' => 'contact',
+        'as' => 'contact.',
+        'controller' => ContactController::class
+    ], function () {
+        Route::get('show', 'show')->name('show');
+    });
 });
 
 require __DIR__.'/auth.php';
