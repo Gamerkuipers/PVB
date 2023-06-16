@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Dashboard\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
