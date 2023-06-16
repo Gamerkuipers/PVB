@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AdController;
 use App\Http\Controllers\Dashboard\ContactController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,11 @@ Route::group([
         Route::get('show', 'show')->name('show');
     });
 
+    Route::group([
+        'prefix' => 'ad',
+        'as' => 'ad.',
+        'controller' => AdController::class,
+    ], function () {
+        Route::get('/', 'index')->name('index');
+    });
 });

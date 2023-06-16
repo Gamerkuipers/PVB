@@ -3,7 +3,12 @@
     <div class="space-y-2">
         <h2 class="text-2xl font-bold">{{ __('Ads') }}</h2>
         <div class="grid gap-1 pl-2">
-            <x-nav-link-dashboard>{{ __('List') }}</x-nav-link-dashboard>
+            <x-nav-link-dashboard
+            :href="route('dashboard.ad.index')"
+            :active="request()->routeIs('dashboard.ad.index')"
+        >
+            {{ __('List') }}
+        </x-nav-link-dashboard>
             <x-nav-link-dashboard>{{ __('Create') }}</x-nav-link-dashboard>
             <x-nav-link-dashboard>{{ __('Sold') }}</x-nav-link-dashboard>
         </div>
