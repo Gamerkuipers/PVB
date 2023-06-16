@@ -23,5 +23,6 @@ Route::group([
         'controller' => AdController::class,
     ], function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/show', 'show')->name('show');
     });
 });

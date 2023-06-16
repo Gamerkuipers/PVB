@@ -12,4 +12,9 @@ class AdController extends Controller
     {
         return view('dashboard.ad.index');
     }
+
+    public function show(): View
+    {
+        return view('dashboard.ad.show');
+    }
 }
