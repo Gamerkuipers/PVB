@@ -18,11 +18,11 @@
         <div class="min-h-screen">
            @include('layouts.navigation')
 
-            <main>
+            <main class="pt-16">
                 {{ $slot }}
             </main>
-
-            @include('layouts.footer')
         </div>
+
+        @include('layouts.footer')
     </body>
 </html>

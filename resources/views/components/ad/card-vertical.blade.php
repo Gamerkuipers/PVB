@@ -1,4 +1,4 @@
-<div class="bg-primary">
+<div {{ $attributes->class(['bg-primary']) }}>
     <div class="relative">
         <img src="{{ asset('images/img.png') }}" alt="">
         <span class="absolute bottom-0 right-0 bg-primary px-4 py-2 rounded-tl-xl font-bold text-2xl">

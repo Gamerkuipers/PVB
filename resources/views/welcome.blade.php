@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="flex max-w-screen-2xl mx-auto gap-4 min-h-screen items-center pt-16">
+    <div class="flex max-w-screen-2xl mx-auto gap-4 min-h-screen items-center">
         @for($i = 1; $i <= 3; $i++)
             <x-ad.card-vertical/>
         @endfor
