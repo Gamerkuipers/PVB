@@ -5,7 +5,14 @@
             <div class="divide-y-2 divide-primary">
                 @for($i = 0; $i < 10; $i++)
                     <div class="py-5">
-                        <x-ad.card-horizontal/>
+                        <x-ad.card-horizontal>
+                            <x-slot:action>
+                                <x-link class="text-xl" :href="route('dashboard.ad.show')">
+                                    {{ __('View ad') }}
+                                    <x-icon.arrow-right></x-icon.arrow-right>
+                                </x-link>
+                            </x-slot:action>
+                        </x-ad.card-horizontal>
                     </div>
                 @endfor
             </div>

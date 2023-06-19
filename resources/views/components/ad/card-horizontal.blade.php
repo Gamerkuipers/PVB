@@ -24,10 +24,14 @@
         </div>
 
         <div class="flex justify-end">
-            <x-link class="text-xl" :href="route('ad.show')">
-                {{ __('View ad') }}
-                <x-icon.arrow-right></x-icon.arrow-right>
-            </x-link>
+            @isset($action)
+                {{ $action }}
+            @else
+                <x-link class="text-xl" :href="route('ad.show')">
+                    {{ __('View ad') }}
+                    <x-icon.arrow-right></x-icon.arrow-right>
+                </x-link>
+            @endisset
         </div>
     </div>
 </div>
