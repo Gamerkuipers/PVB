@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\AdController;
+use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Dashboard\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,7 +32,7 @@ Route::middleware('auth')->group(function () {
 Route::group([
     'prefix' => 'ad',
     'as' => 'ad.',
-    'controller' => AdController::class,
+    'controller' => AdvertisementController::class,
 ], function () {
    Route::get('/', 'index')->name('index');
    Route::get('/show', 'show')->name('show');

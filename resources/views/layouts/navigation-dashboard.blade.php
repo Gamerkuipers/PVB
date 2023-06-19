@@ -1,7 +1,7 @@
 <nav class="w-1/5 bg-primary p-4 space-y-4 text-text">
     <x-application-logo class="bg-text lg:w-5/6"></x-application-logo>
     <div class="space-y-2">
-        <h2 class="text-2xl font-bold">{{ __('Ads') }}</h2>
+        <h2 class="text-2xl font-bold">{{ __('Advertisement') }}</h2>
         <div class="grid gap-1 pl-2">
             <x-nav-link-dashboard
             :href="route('dashboard.ad.index')"
