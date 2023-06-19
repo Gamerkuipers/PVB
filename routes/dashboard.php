@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AboutController;
 use App\Http\Controllers\Dashboard\AdController;
 use App\Http\Controllers\Dashboard\ContactController;
 use Illuminate\Support\Facades\Route;
@@ -14,7 +15,7 @@ Route::group([
         'as' => 'contact.',
         'controller' => ContactController::class
     ], function () {
-        Route::get('show', 'show')->name('show');
+        Route::get('/', 'index')->name('index');
     });
 
     Route::group([
@@ -24,5 +25,13 @@ Route::group([
     ], function () {
         Route::get('/', 'index')->name('index');
         Route::get('/show', 'show')->name('show');
+    });
+
+    Route::group([
+        'prefix' => 'about',
+        'as' => 'about.',
+        'controller' => AboutController::class,
+    ], function () {
+        Route::get('/', 'index')->name('index');
     });
 });

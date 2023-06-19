@@ -15,9 +15,12 @@
     </div>
 
     <div class="space-y-2">
-        <h2 class="text-2xl font-bold">{{ __('About the company') }}</h2>
+        <h2 class="text-2xl font-bold">{{ __('About') }}</h2>
         <div class="grid gap-1 pl-2">
-            <x-nav-link-dashboard>{{ __('List') }}</x-nav-link-dashboard>
+            <x-nav-link-dashboard
+                :href="route('dashboard.about.index')"
+                :active="request()->routeIs('dashboard.about.index')"
+            >{{ __('View') }}</x-nav-link-dashboard>
             <x-nav-link-dashboard>{{ __('Edit') }}</x-nav-link-dashboard>
         </div>
     </div>
@@ -26,10 +29,10 @@
         <h2 class="text-2xl font-bold">{{ __('Contact') }}</h2>
         <div class="grid gap-1 pl-2">
             <x-nav-link-dashboard
-                :href="route('dashboard.contact.show')"
-                :active="request()->routeIs('dashboard.contact.show')"
+                :href="route('dashboard.contact.index')"
+                :active="request()->routeIs('dashboard.contact.index')"
             >
-                {{ __('List') }}
+                {{ __('View') }}
             </x-nav-link-dashboard>
             <x-nav-link-dashboard>{{ __('Edit') }}</x-nav-link-dashboard>
         </div>

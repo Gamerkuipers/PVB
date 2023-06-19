@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    public function show(): View
+    public function index(): View
     {
-        return view('dashboard.contact.show');
+        return view('dashboard.contact.index');
     }
 }
