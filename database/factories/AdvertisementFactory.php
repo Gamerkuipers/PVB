@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Ad>
  */
-class AdFactory extends Factory
+class AdvertisementFactory extends Factory
 {
     /**
      * Define the model's default state.

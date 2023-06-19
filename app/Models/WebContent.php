@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class WebContent extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
       'head',
       'body'

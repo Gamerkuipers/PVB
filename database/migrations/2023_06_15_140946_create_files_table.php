@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\Ad;
+use App\Models\Advertisement;
+use App\Models\Contact;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->boolean('thumbnail')->default(false);
             $table->text('location');
-            $table->foreignIdFor(Ad::class);
+            $table->foreignIdFor(Advertisement::class);
             $table->timestamps();
         });
     }
