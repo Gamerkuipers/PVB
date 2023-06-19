@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('web_contents', function (Blueprint $table) {
             $table->id();
+            $table->string('key')->unique();
             $table->string('head');
             $table->text('body');
             $table->timestamps();
