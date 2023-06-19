@@ -9,7 +9,10 @@
         >
             {{ __('List') }}
         </x-nav-link-dashboard>
-            <x-nav-link-dashboard>{{ __('Create') }}</x-nav-link-dashboard>
+            <x-nav-link-dashboard
+                :href="route('dashboard.ad.create')"
+                :active="request()->routeIs('dashboard.ad.create')"
+            >{{ __('Create') }}</x-nav-link-dashboard>
             <x-nav-link-dashboard>{{ __('Sold') }}</x-nav-link-dashboard>
         </div>
     </div>

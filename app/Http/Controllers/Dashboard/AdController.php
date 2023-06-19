@@ -17,4 +17,9 @@ class AdController extends Controller
     {
         return view('dashboard.ad.show');
     }
+
+    public function create(): View
+    {
+        return view('dashboard.ad.create');
+    }
 }

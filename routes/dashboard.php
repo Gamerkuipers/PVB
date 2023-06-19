@@ -25,6 +25,7 @@ Route::group([
     ], function () {
         Route::get('/', 'index')->name('index');
         Route::get('/show', 'show')->name('show');
+        Route::get('/create', 'create')->name('create');
     });
 
     Route::group([

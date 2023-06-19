@@ -17,7 +17,8 @@ export default {
             colors: {
                 primary: '#272D2D',
                 secondary: '#23CE6B',
-                text: '#EDF5FC'
+                text: '#EDF5FC',
+                danger: '#ef4444'
             },
             height: {
               inherit: 'inherit'
