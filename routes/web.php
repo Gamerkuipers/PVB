@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
 
 Route::group([
     'prefix' => 'ad',
-    'as' => 'ad.',
+    'as' => 'advertisement.',
     'controller' => AdvertisementController::class,
 ], function () {
    Route::get('/', 'index')->name('index');

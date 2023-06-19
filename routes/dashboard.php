@@ -20,7 +20,7 @@ Route::group([
 
     Route::group([
         'prefix' => 'ad',
-        'as' => 'ad.',
+        'as' => 'advertisement.',
         'controller' => AdvertisementController::class,
     ], function () {
         Route::get('/', 'index')->name('index');

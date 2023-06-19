@@ -12,6 +12,10 @@ class Advertisement extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $guarded = [
+        'id',
+    ];
+
     public function files(): HasMany
     {
         return $this->hasMany(File::class);

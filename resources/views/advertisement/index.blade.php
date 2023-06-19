@@ -5,7 +5,7 @@
             <div class="divide-y-2 divide-primary">
                 @for($i = 0; $i < 10; $i++)
                     <div class="py-5">
-                        <x-ad.card-horizontal/>
+                        <x-advertisement.card-horizontal/>
                     </div>
                 @endfor
             </div>

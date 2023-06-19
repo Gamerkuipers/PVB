@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('brand');
             $table->text('description');
             $table->string('price');
+            $table->string('kilometer');
             $table->string('license_plate');
             $table->integer('build_year');
             $table->string('body');

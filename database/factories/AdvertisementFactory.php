@@ -23,7 +23,8 @@ class AdvertisementFactory extends Factory
             ]),
             'description' => $this->faker->sentence(),
             'price' => $this->faker->numberBetween(20000, 60000),
-            'license_plate' => $this->faker->randomAscii(),
+            'kilometer' => $this->faker->numberBetween(),
+            'license_plate' => $this->faker->word(),
             'build_year' => $this->faker->year(),
             'body' => $this->faker->randomElement([
                 'Cabriolet', 'Hatchback', 'Sedan', 'Stationwagon'

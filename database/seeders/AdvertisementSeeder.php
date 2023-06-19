@@ -20,7 +20,7 @@ class AdvertisementSeeder extends Seeder
         $ads->each(fn($ad, $key) => File::create([
             'thumbnail' => true,
             'advertisement_id' => $ad->id,
-            'location' => 'images/image.png',
+            'location' => 'images/img.png',
         ]));
     }
 }

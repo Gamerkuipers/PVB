@@ -15,13 +15,13 @@
             erat luctus in. Suspendisse potenti.
         </p>
         <div>
-            <x-ad.specification :title="__('Brand')">Lorem Ipsum</x-ad.specification>
-            <x-ad.specification :title="__('Name')">Lorem Ipsum</x-ad.specification>
-            <x-ad.specification :title="__('License plate')">Lorem Ipsum</x-ad.specification>
-            <x-ad.specification :title="__('Type')">Lorem Ipsum</x-ad.specification>
-            <x-ad.specification :title="__('Kilometer')">Lorem Ipsum</x-ad.specification>
-            <x-ad.specification :title="__('Fuel')">Lorem Ipsum</x-ad.specification>
-            <x-ad.specification :title="__('BTW')">Lorem Ipsum</x-ad.specification>
+            <x-advertisement.specification :title="__('Brand')">Lorem Ipsum</x-advertisement.specification>
+            <x-advertisement.specification :title="__('Name')">Lorem Ipsum</x-advertisement.specification>
+            <x-advertisement.specification :title="__('License plate')">Lorem Ipsum</x-advertisement.specification>
+            <x-advertisement.specification :title="__('Type')">Lorem Ipsum</x-advertisement.specification>
+            <x-advertisement.specification :title="__('Kilometer')">Lorem Ipsum</x-advertisement.specification>
+            <x-advertisement.specification :title="__('Fuel')">Lorem Ipsum</x-advertisement.specification>
+            <x-advertisement.specification :title="__('BTW')">Lorem Ipsum</x-advertisement.specification>
         </div>
         <div class="flex justify-end">
             <x-link class="text-xl">

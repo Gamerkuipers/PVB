@@ -4,14 +4,14 @@
         <h2 class="text-2xl font-bold">{{ __('Advertisement') }}</h2>
         <div class="grid gap-1 pl-2">
             <x-nav-link-dashboard
-            :href="route('dashboard.ad.index')"
-            :active="request()->routeIs('dashboard.ad.index')"
+            :href="route('dashboard.advertisement.index')"
+            :active="request()->routeIs('dashboard.advertisement.index')"
         >
             {{ __('List') }}
         </x-nav-link-dashboard>
             <x-nav-link-dashboard
-                :href="route('dashboard.ad.create')"
-                :active="request()->routeIs('dashboard.ad.create')"
+                :href="route('dashboard.advertisement.create')"
+                :active="request()->routeIs('dashboard.advertisement.create')"
             >{{ __('Create') }}</x-nav-link-dashboard>
             <x-nav-link-dashboard>{{ __('Sold') }}</x-nav-link-dashboard>
         </div>
