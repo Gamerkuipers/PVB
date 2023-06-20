@@ -17,8 +17,9 @@
     <body class="font-sans bg-text antialiased">
         <div class="min-h-screen">
             <div class="flex min-h-screen">
-
-                @include('layouts.navigation-dashboard')
+                <div class="sm:w-1/5 flex">
+                    @include('layouts.navigation-dashboard')
+                </div>
 
                 <!-- Page Content -->
                 <main class="w-full">

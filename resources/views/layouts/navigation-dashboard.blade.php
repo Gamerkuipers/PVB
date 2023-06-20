@@ -1,6 +1,4 @@
-<nav class="sm:w-1/5 bg-primary p-4 space-y-4 text-text z-50">
-    <x-application-logo class="bg-text lg:w-5/6 hidden sm:block"></x-application-logo>
-
+<nav class="bg-primary p-4 space-y-4 text-text z-50 h-full fixed top-0 left-0">
     <div class="space-y-4">
         <x-nav-group-dashboard :title="__('Advertisement')">
             <x-slot:icon>

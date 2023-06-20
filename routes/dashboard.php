@@ -28,6 +28,7 @@ Route::group([
 
         Route::prefix('/{advertisement}')->group(function () {
             Route::get('/', 'show')->name('show');
+            Route::get('/edit', 'edit')->name('edit');
         });
     });
 

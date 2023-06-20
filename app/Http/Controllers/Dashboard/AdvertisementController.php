@@ -27,4 +27,11 @@ class AdvertisementController extends Controller
     {
         return view('dashboard.advertisement.create');
     }
+
+    public function edit(Advertisement $advertisement): View
+    {
+        return view('dashboard.advertisement.edit', [
+            'advertisement' => $advertisement,
+        ]);
+    }
 }

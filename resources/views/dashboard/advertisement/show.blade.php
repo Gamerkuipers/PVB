@@ -1,11 +1,14 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto px-10 min-h-screen items-center py-20 space-y-6 text-primary">
         {{-- Action bar --}}
-        <div>
+        <div class="flex justify-between items-center gap-2">
             <x-link-inverted :href="route('dashboard.advertisement.index')" class="w-fit">
                 <x-icon.arrow-left></x-icon.arrow-left>
                 {{ __('Alle advertenties') }}
             </x-link-inverted>
+            <a href="{{ route('dashboard.advertisement.edit', $advertisement) }}">
+                <x-secondary-button>{{ __('Edit') }}</x-secondary-button>
+            </a>
         </div>
         {{-- content --}}
         <h1 class="font-bold text-2xl">
