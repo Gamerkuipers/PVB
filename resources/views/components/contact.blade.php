@@ -1,4 +1,4 @@
-<div class="space-y-4">
+<div class="space-y-4" id="Contact">
     <h2 class="font-bold text-4xl text-secondary uppercase">{{ __('Contact') }}</h2>
         <div class="space-y-4">
 
