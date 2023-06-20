@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="flex max-w-screen-2xl px-10 mx-auto gap-4 min-h-screen items-center">
+    <div class="flex max-w-screen-2xl p-10 mx-auto gap-4 min-h-screen items-center flex-col md:flex-row">
         @for($i = 1; $i <= 3; $i++)
             <x-advertisement.card.vertical/>
         @endfor
@@ -7,7 +7,7 @@
     <div class="bg-primary p-10" id="AboutTheCompany">
         <div class="max-w-7xl mx-auto space-y-6">
             <h2 class="font-bold text-4xl text-center text-secondary uppercase">{{ __('About the company') }}</h2>
-            <div class="flex items-center gap-10 justify-between">
+            <div class="flex items-center gap-10 justify-between flex-col-reverse md:flex-row">
                 <p class="text-xl">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum risus urna, vel dapibus erat
                     luctus in. Suspendisse potenti. Aliquam erat volutpat. Nam cursus lectus id nisi consequat, et
@@ -22,7 +22,7 @@
                     vitae dictum enim facilisis pharetra. Vestibulum maximus, dolor ut euismod efficitur, purus orci
                     molestie leo, et dapibus purus purus et nulla.
                 </p>
-                <x-application-logo class="w-1/5 bg-text"></x-application-logo>
+                <x-application-logo class="w-2/5 bg-text"></x-application-logo>
             </div>
         </div>
     </div>

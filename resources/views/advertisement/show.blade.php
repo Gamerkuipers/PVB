@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-10 min-h-screen items-center py-20 space-y-6 text-primary">
         {{-- Action bar --}}
         <div>
-            <x-link-inverted :href="route('ad.index')" class="w-fit">
+            <x-link-inverted :href="route('advertisement.index')" class="w-fit">
                 <x-icon.arrow-left></x-icon.arrow-left>
                 {{ __('Alle advertenties') }}
             </x-link-inverted>
