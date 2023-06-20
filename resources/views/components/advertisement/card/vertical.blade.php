@@ -2,26 +2,21 @@
     <div class="relative">
         <img src="{{ asset('images/img.png') }}" alt="">
         <span class="absolute bottom-0 right-0 bg-primary px-4 py-2 rounded-tl-xl font-bold text-2xl">
-                        €29.000,00
-                    </span>
+            €{{ $advertisement->price }}
+        </span>
     </div>
 
     <div class="p-4 space-y-2">
         <h2 class="font-bold text-xl">
-            orem ipsum dolor sit amet, consectetur adipiscing elit.
+            {{ $advertisement->description }}
         </h2>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum risus urna, vel dapibus
-            erat luctus in. Suspendisse potenti.
-        </p>
         <div>
-            <x-advertisement.specification :title="__('Brand')">Lorem Ipsum</x-advertisement.specification>
-            <x-advertisement.specification :title="__('Name')">Lorem Ipsum</x-advertisement.specification>
-            <x-advertisement.specification :title="__('License plate')">Lorem Ipsum</x-advertisement.specification>
-            <x-advertisement.specification :title="__('Type')">Lorem Ipsum</x-advertisement.specification>
-            <x-advertisement.specification :title="__('Kilometer')">Lorem Ipsum</x-advertisement.specification>
-            <x-advertisement.specification :title="__('Fuel')">Lorem Ipsum</x-advertisement.specification>
-            <x-advertisement.specification :title="__('BTW')">Lorem Ipsum</x-advertisement.specification>
+            <x-advertisement.specification :title="__('Brand')">{{ $advertisement->brand }}</x-advertisement.specification>
+            <x-advertisement.specification :title="__('License plate')">{{ $advertisement->license_plate }}</x-advertisement.specification>
+            <x-advertisement.specification :title="__('Type')">{{ $advertisement->type }}</x-advertisement.specification>
+            <x-advertisement.specification :title="__('Kilometer')">{{ $advertisement->kilometer }}</x-advertisement.specification>
+            <x-advertisement.specification :title="__('Fuel')">{{ $advertisement->fuel }}</x-advertisement.specification>
+            <x-advertisement.specification :title="__('BTW')">{{ $advertisement->btw }}</x-advertisement.specification>
         </div>
         <div class="flex justify-end">
             <x-link class="text-xl">
