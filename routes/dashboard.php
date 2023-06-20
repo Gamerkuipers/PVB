@@ -24,8 +24,11 @@ Route::group([
         'controller' => AdvertisementController::class,
     ], function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/show', 'show')->name('show');
         Route::get('/create', 'create')->name('create');
+
+        Route::prefix('/{advertisement}')->group(function () {
+            Route::get('/', 'show')->name('show');
+        });
     });
 
     Route::group([

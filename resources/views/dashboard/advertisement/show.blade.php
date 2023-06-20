@@ -9,7 +9,7 @@
         </div>
         {{-- content --}}
         <h1 class="font-bold text-2xl">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. orem ipsum dolor sit amet, consectetur adipiscing elit.
+            {{ $advertisement->description }}
         </h1>
 
         {{-- preview + info --}}
@@ -17,10 +17,10 @@
             <img src="{{ asset('images/img.png') }}" alt="">
             <div class="flex flex-col items-end p-4 text-2xl font-bold">
                 <p>
-                    Merk
+                    {{ $advertisement->brand }}
                 </p>
                 <p>
-                    €29.000,00
+                    €{{ $advertisement->price }}
                 </p>
             </div>
         </div>
@@ -28,9 +28,9 @@
         {{-- All images --}}
         <div>
             <div class="flex gap-4 overflow-x-auto">
-                @for ($i = 0; $i < 20; $i++)
-                    <img src="{{ asset('images/img.png') }}" alt="" class="w-32">
-                @endfor
+                @foreach ($advertisement->files as $file)
+                    <img src="{{ asset($file->location) }}" alt="" class="w-32">
+                @endforeach
             </div>
         </div>
 
@@ -38,23 +38,22 @@
         <h2 class="font-bold text-4xl text-center">{{ __('Specifications') }}</h2>
         <div class="grid md:grid-cols-3 gap-10 text-text">
             <div class="col-span-2 bg-primary p-6 flex flex-col lg:flex-wrap min-h-fit lg:h-80 gap-x-6">
-                <x-advertisement.specification :title="__('Brand')">Lorem Ipsum</x-advertisement.specification>
-                <x-advertisement.specification :title="__('Name')">Lorem Ipsum</x-advertisement.specification>
-                <x-advertisement.specification :title="__('Type')">Lorem Ipsum</x-advertisement.specification>
-                <x-advertisement.specification :title="__('License plate')">Lorem Ipsum</x-advertisement.specification>
-                <x-advertisement.specification :title="__('Build Year')">Lorem Ipsum</x-advertisement.specification>
-                <x-advertisement.specification :title="__('Color')">Lorem Ipsum</x-advertisement.specification>
-                <x-advertisement.specification :title="__('Doors')">Lorem Ipsum</x-advertisement.specification>
-                <x-advertisement.specification :title="__('Seating')">Lorem Ipsum</x-advertisement.specification>
-                <x-advertisement.specification :title="__('APK expire date')">Lorem Ipsum</x-advertisement.specification>
-                <x-advertisement.specification :title="__('Kilometer')">Lorem Ipsum</x-advertisement.specification>
-                <x-advertisement.specification :title="__('Fuel')">Lorem Ipsum</x-advertisement.specification>
-                <x-advertisement.specification :title="__('BTW')">Lorem Ipsum</x-advertisement.specification>
-                <x-advertisement.specification :title="__('Transmission')">Lorem Ipsum</x-advertisement.specification>
-                <x-advertisement.specification :title="__('Power')">Lorem Ipsum</x-advertisement.specification>
-                <x-advertisement.specification :title="__('Weight')">Lorem Ipsum</x-advertisement.specification>
-                <x-advertisement.specification :title="__('Fuel usage')">Lorem Ipsum</x-advertisement.specification>
-                <x-advertisement.specification :title="__('Cylinder capacity')">Lorem Ipsum</x-advertisement.specification>
+                <x-advertisement.specification :title="__('Brand')">{{ $advertisement->brand }}</x-advertisement.specification>
+                <x-advertisement.specification :title="__('Type')">{{ $advertisement->type }}</x-advertisement.specification>
+                <x-advertisement.specification :title="__('License plate')">{{ $advertisement->license_plate }}</x-advertisement.specification>
+                <x-advertisement.specification :title="__('Build Year')">{{ $advertisement->build_year }}</x-advertisement.specification>
+                <x-advertisement.specification :title="__('Color')">{{ $advertisement->color }}</x-advertisement.specification>
+                <x-advertisement.specification :title="__('Doors')">{{ $advertisement->doors }}</x-advertisement.specification>
+                <x-advertisement.specification :title="__('Seating')">{{ $advertisement->seating }}</x-advertisement.specification>
+                <x-advertisement.specification :title="__('APK expire date')">{{ $advertisement->apk_expire_date }}</x-advertisement.specification>
+                <x-advertisement.specification :title="__('Kilometer')">{{ $advertisement->kilometer }}</x-advertisement.specification>
+                <x-advertisement.specification :title="__('Fuel')">{{ $advertisement->fuel }}</x-advertisement.specification>
+                <x-advertisement.specification :title="__('BTW')">{{ $advertisement->btw }}</x-advertisement.specification>
+                <x-advertisement.specification :title="__('Transmission')">{{ $advertisement->transmission }}</x-advertisement.specification>
+                <x-advertisement.specification :title="__('Power')">{{ $advertisement->power }}</x-advertisement.specification>
+                <x-advertisement.specification :title="__('Weight')">{{ $advertisement->weight }}</x-advertisement.specification>
+                <x-advertisement.specification :title="__('Fuel usage')">{{ $advertisement->fuel_usage }}</x-advertisement.specification>
+                <x-advertisement.specification :title="__('Cylinder capacity')">{{ $advertisement->cylinder_capacity }}</x-advertisement.specification>
             </div>
             <div class="bg-primary p-6">
                 <h2 class="font-bold text-xl text-center">

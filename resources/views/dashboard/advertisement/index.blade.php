@@ -8,7 +8,7 @@
                     <div class="py-5">
                         <x-advertisement.card.horizontal :advertisement="$advertisement">
                             <x-slot:action>
-                                <x-link class="text-xl" :href="route('dashboard.advertisement.show')">
+                                <x-link class="text-xl" :href="route('dashboard.advertisement.show', $advertisement)">
                                     {{ __('View ad') }}
                                     <x-icon.arrow-right></x-icon.arrow-right>
                                 </x-link>
