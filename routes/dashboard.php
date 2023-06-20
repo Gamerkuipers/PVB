@@ -11,14 +11,6 @@ Route::group([
 ], function () {
 
     Route::group([
-        'prefix' => 'contact',
-        'as' => 'contact.',
-        'controller' => ContactController::class
-    ], function () {
-        Route::get('/', 'index')->name('index');
-    });
-
-    Route::group([
         'prefix' => 'ad',
         'as' => 'advertisement.',
         'controller' => AdvertisementController::class,
@@ -38,5 +30,15 @@ Route::group([
         'controller' => AboutController::class,
     ], function () {
         Route::get('/', 'index')->name('index');
+    });
+
+
+    Route::group([
+        'prefix' => 'contact',
+        'as' => 'contact.',
+        'controller' => ContactController::class
+    ], function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/edit', 'edit')->name('edit');
     });
 });

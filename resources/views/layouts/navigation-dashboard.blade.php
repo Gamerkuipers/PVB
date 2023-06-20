@@ -35,7 +35,7 @@
             <x-nav-link-dashboard route="dashboard.contact.index">
                 {{ __('View') }}
             </x-nav-link-dashboard>
-            <x-nav-link-dashboard>
+            <x-nav-link-dashboard route="dashboard.contact.edit">
                 {{ __('Edit') }}
             </x-nav-link-dashboard>
         </x-nav-group-dashboard>

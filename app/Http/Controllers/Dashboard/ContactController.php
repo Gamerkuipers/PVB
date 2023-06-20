@@ -12,4 +12,9 @@ class ContactController extends Controller
     {
         return view('dashboard.contact.index');
     }
+
+
+    public function edit() {
+        return view('dashboard.contact.edit');
+    }
 }
