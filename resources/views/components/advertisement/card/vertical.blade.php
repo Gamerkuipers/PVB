@@ -1,4 +1,4 @@
-<div {{ $attributes->class(['bg-primary']) }}>
+<div {{ $attributes->class(['bg-primary flex flex-col']) }}>
     <div class="relative">
         <img src="{{ asset('images/img.png') }}" alt="">
         <span class="absolute bottom-0 right-0 bg-primary px-4 py-2 rounded-tl-xl font-bold text-2xl">
@@ -6,7 +6,7 @@
         </span>
     </div>
 
-    <div class="p-4 space-y-2">
+    <div class="p-4 space-y-2 h-full flex flex-col justify-between">
         <h2 class="font-bold text-xl">
             {{ $advertisement->description }}
         </h2>
