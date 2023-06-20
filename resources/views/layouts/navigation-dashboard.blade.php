@@ -1,44 +1,45 @@
-<nav class="w-1/5 bg-primary p-4 space-y-4 text-text">
-    <x-application-logo class="bg-text lg:w-5/6"></x-application-logo>
-    <div class="space-y-2">
-        <h2 class="text-2xl font-bold">{{ __('Advertisement') }}</h2>
-        <div class="grid gap-1 pl-2">
-            <x-nav-link-dashboard
-            :href="route('dashboard.advertisement.index')"
-            :active="request()->routeIs('dashboard.advertisement.index')"
-        >
-            {{ __('List') }}
-        </x-nav-link-dashboard>
-            <x-nav-link-dashboard
-                :href="route('dashboard.advertisement.create')"
-                :active="request()->routeIs('dashboard.advertisement.create')"
-            >{{ __('Create') }}</x-nav-link-dashboard>
-            <x-nav-link-dashboard>{{ __('Sold') }}</x-nav-link-dashboard>
-        </div>
-    </div>
+<nav class="sm:w-1/5 bg-primary p-4 space-y-4 text-text z-50">
+    <x-application-logo class="bg-text lg:w-5/6 hidden sm:block"></x-application-logo>
 
-    <div class="space-y-2">
-        <h2 class="text-2xl font-bold">{{ __('About') }}</h2>
-        <div class="grid gap-1 pl-2">
-            <x-nav-link-dashboard
-                :href="route('dashboard.about.index')"
-                :active="request()->routeIs('dashboard.about.index')"
-            >{{ __('View') }}</x-nav-link-dashboard>
-            <x-nav-link-dashboard>{{ __('Edit') }}</x-nav-link-dashboard>
-        </div>
-    </div>
+    <div class="space-y-4">
+        <x-nav-group-dashboard :title="__('Advertisement')">
+            <x-slot:icon>
+                <x-icon.book />
+            </x-slot:icon>
+            <x-nav-link-dashboard route="dashboard.advertisement.index">
+                {{ __('List') }}
+            </x-nav-link-dashboard>
+            <x-nav-link-dashboard route="dashboard.advertisement.create">
+                {{ __('Create') }}
+            </x-nav-link-dashboard>
+            <x-nav-link-dashboard>
+                {{ __('Sold') }}
+            </x-nav-link-dashboard>
+        </x-nav-group-dashboard>
 
-    <div class="space-y-2">
-        <h2 class="text-2xl font-bold">{{ __('Contact') }}</h2>
-        <div class="grid gap-1 pl-2">
-            <x-nav-link-dashboard
-                :href="route('dashboard.contact.index')"
-                :active="request()->routeIs('dashboard.contact.index')"
-            >
+
+        <x-nav-group-dashboard :title="__('About')">
+            <x-slot:icon>
+                <x-icon.info />
+            </x-slot:icon>
+            <x-nav-link-dashboard route="dashboard.about.index">
                 {{ __('View') }}
             </x-nav-link-dashboard>
-            <x-nav-link-dashboard>{{ __('Edit') }}</x-nav-link-dashboard>
-        </div>
-    </div>
+            <x-nav-link-dashboard>
+                {{ __('Edit') }}
+            </x-nav-link-dashboard>
+        </x-nav-group-dashboard>
 
+        <x-nav-group-dashboard :title="__('Contact')">
+            <x-slot:icon>
+                <x-icon.at-sign />
+            </x-slot:icon>
+            <x-nav-link-dashboard route="dashboard.contact.index">
+                {{ __('View') }}
+            </x-nav-link-dashboard>
+            <x-nav-link-dashboard>
+                {{ __('Edit') }}
+            </x-nav-link-dashboard>
+        </x-nav-group-dashboard>
+    </div>
 </nav>

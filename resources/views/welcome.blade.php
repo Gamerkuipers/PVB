@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="flex max-w-screen-2xl px-10 mx-auto gap-4 min-h-screen items-center">
         @for($i = 1; $i <= 3; $i++)
-            <x-adverisement.card.vertical/>
+            <x-advertisement.card.vertical/>
         @endfor
     </div>
     <div class="bg-primary p-10" id="AboutTheCompany">
