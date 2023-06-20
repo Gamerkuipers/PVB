@@ -22,7 +22,7 @@
                     vitae dictum enim facilisis pharetra. Vestibulum maximus, dolor ut euismod efficitur, purus orci
                     molestie leo, et dapibus purus purus et nulla.
                 </p>
-                <x-application-logo class="h-56 bg-text"></x-application-logo>
+                <x-application-logo class="w-1/5 bg-text"></x-application-logo>
             </div>
         </div>
     </div>
