@@ -10,4 +10,8 @@ class AboutController extends Controller
     public function index() {
         return view('dashboard.about.index');
     }
+
+    public function edit() {
+        return view('dashboard.about.edit');
+    }
 }

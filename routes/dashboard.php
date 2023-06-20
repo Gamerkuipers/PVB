@@ -30,6 +30,7 @@ Route::group([
         'controller' => AboutController::class,
     ], function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/edit', 'edit')->name('edit');
     });
 
 

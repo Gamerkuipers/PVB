@@ -23,7 +23,7 @@
             <x-nav-link-dashboard route="dashboard.about.index">
                 {{ __('View') }}
             </x-nav-link-dashboard>
-            <x-nav-link-dashboard>
+            <x-nav-link-dashboard route="dashboard.about.edit">
                 {{ __('Edit') }}
             </x-nav-link-dashboard>
         </x-nav-group-dashboard>
