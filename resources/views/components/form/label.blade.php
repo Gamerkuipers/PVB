@@ -1,3 +1,6 @@
+@props([
+    'isRequired' => false,
+])
 <label {{ $attributes->class(['font-semibold']) }}>
-    {{ $slot }}
+    {{ $slot }} {{ $isRequired ? '*' : '' }}
 </label>

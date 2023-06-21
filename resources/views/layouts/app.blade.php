@@ -13,6 +13,8 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        @livewireStyles
     </head>
     <body class="font-sans bg-text antialiased">
         <div class="min-h-screen">
@@ -27,5 +29,11 @@
                 </main>
             </div>
         </div>
+
+        @livewireScripts
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <x-livewire-alert::scripts />
     </body>
 </html>
