@@ -67,6 +67,7 @@ class Edit extends Component
 
         $this->alertWarning(__('Something went wrong. Try again later.'));
 
+        return null;
     }
 
     public function deleteContact(int $index): void
