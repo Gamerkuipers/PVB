@@ -39,7 +39,7 @@ class Edit extends Component
     ];
 
     protected $listeners = [
-        'cancelEditing',
+        'confirmedCancel' => 'cancelEditing',
     ];
 
     public function mount()
@@ -95,15 +95,7 @@ class Edit extends Component
 
     public function confirmCancelEditing()
     {
-        $this->alertWarning(__('All unsaved data will be lost if you proceed.'), [
-            'timer' => null,
-            'position' => 'center',
-            'showDenyButton' => true,
-            'denyButtonText' => __('Continue'),
-            'onDenied' => 'cancelEditing',
-            'showCancelButton' => true,
-            'cancelButtonText' => __('Nevermind'),
-        ]);
+        $this->cancel(__('All unsaved data will be lost if you proceed.'));
     }
 
     public function cancelEditing(): RedirectResponse|Redirector
