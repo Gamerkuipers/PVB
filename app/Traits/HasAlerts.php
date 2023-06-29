@@ -24,4 +24,20 @@ trait HasAlerts
     {
         return $this->flash('success', $message, $options, $url);
     }
+
+    public function cancel($message, $onDeniedEvent = 'confirmedCancel', $denyText = null, $cancelText = null): void
+    {
+        $denyText = $denyText ?: __('Continue');
+        $cancelText = $cancelText ?: __('Nevermind');
+
+        $this->alertWarning($message, [
+            'timer' => null,
+            'position' => 'center',
+            'showDenyButton' => true,
+            'denyButtonText' => $denyText,
+            'onDenied' => $onDeniedEvent,
+            'showCancelButton' => true,
+            'cancelButtonText' => $cancelText,
+        ]);
+    }
 }

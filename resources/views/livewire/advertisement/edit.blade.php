@@ -1,4 +1,5 @@
 <x-advertisement.display-layout :advertisement="$advertisement">
+    @dump($errors)
     <x-slot:actions>
         <div class="flex items-center justify-end">
             <div class="flex items-center gap-4">
@@ -9,16 +10,22 @@
     </x-slot:actions>
 
     <x-slot:description>
-        <div>
-            <x-form.input class="w-full" :placeholder="__('Titel')" wire:model="advertisement.description"/>
+        <div class="space-y-1">
+            <x-form.input class="w-full"
+                          :placeholder="__('Titel')"
+                          wire:model="advertisement.description"
+                          name="advertisement.description"/>
             <x-form.error for="advertisement.description"></x-form.error>
         </div>
     </x-slot:description>
 
     <x-slot:price>
-        <div class="flex items-center gap-2">
-            €
-            <x-form.input :placeholder="__('29.000,00')" wire:model="advertisement.price"/>
+        <div class="space-y-1">
+            <div class="flex items-center gap-2">
+                €
+                <x-form.input :placeholder="__('29.000,00')" wire:model="advertisement.price"/>
+            </div>
+            <x-form.error for="advertisement.price"></x-form.error>
         </div>
     </x-slot:price>
 

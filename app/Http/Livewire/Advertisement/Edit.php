@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Advertisement;
 
+use App\Actions\Advertisement\UpdateAdvertisement;
 use App\Models\Advertisement;
 use App\Traits\HasAlerts;
 use Illuminate\Http\RedirectResponse;
@@ -18,11 +19,15 @@ class Edit extends Component
     protected array $rules = [
         'advertisement.description' => ['required', 'string', 'max:65535'],
         'advertisement.price' => ['required', 'string', 'max:255'],
-        'advertisement.license_plate' => ['required', 'string', 'max:255']
+        'advertisement.license_plate' => ['required', 'string', 'max:255'],
+    ];
+
+    protected $validationAttributes = [
+      'advertisement.license_plate' => 'license plate',
     ];
 
     protected $listeners = [
-        'cancelEditing'
+        'confirmedCancel' => 'cancelEditing'
     ];
 
     public function render(): View
@@ -30,21 +35,27 @@ class Edit extends Component
         return view('livewire.advertisement.edit');
     }
 
-    public function confirmCancelEditing()
+    public function confirmCancelEditing(): void
     {
-        $this->alertWarning(__('All unsaved data will be lost if you proceed.'), [
-            'timer' => null,
-            'position' => 'center',
-            'showDenyButton' => true,
-            'denyButtonText' => __('Continue'),
-            'onDenied' => 'cancelEditing',
-            'showCancelButton' => true,
-            'cancelButtonText' => __('Nevermind'),
-        ]);
+        $this->cancel(__('All unsaved data will be lost if you proceed.'));
     }
 
     public function cancelEditing(): RedirectResponse|Redirector
     {
         return to_route('dashboard.advertisement.show', $this->advertisement);
+    }
+
+    public function save(UpdateAdvertisement $updater): Redirector|RedirectResponse|null
+    {
+//        if(!$this->validate()) return null;
+
+        if ($this->advertisement->isClean()
+            || $updater->update($this->advertisement)
+        ) {
+            return $this->flashSuccess(__('Successfully updated advertisement!'), route('dashboard.advertisement.show', $this->advertisement));
+        }
+
+        $this->alertWarning(__('Something went wrong. Try again later.'));
+        return null;
     }
 }
