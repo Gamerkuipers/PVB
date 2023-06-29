@@ -9,6 +9,10 @@ class File extends Model
 {
     protected $fillable = [
       'thumbnail',
-      'location'
+      'location',
+    ];
+
+    protected $casts = [
+      'thumbnail' => 'boolean',
     ];
 }

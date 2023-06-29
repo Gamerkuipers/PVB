@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Advertisement extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory,
+        SoftDeletes;
 
     protected $guarded = [
         'id',
@@ -19,5 +19,10 @@ class Advertisement extends Model
     public function files(): HasMany
     {
         return $this->hasMany(File::class);
+    }
+
+    public function thumbnail(): File
+    {
+        return $this->files->firstWhere('thumbnail', 1);
     }
 }
