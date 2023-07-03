@@ -27,7 +27,7 @@
         @isset($thumbnail)
             {{ $thumbnail }}
         @else
-            <img src="{{ asset($advertisement->thumbnail()->location) }}" alt="">
+            <img src="{{ asset($advertisement->thumbnail()?->location) }}" alt="">
         @endisset
         <div class="flex flex-col items-end p-4 text-2xl font-bold">
             <p>

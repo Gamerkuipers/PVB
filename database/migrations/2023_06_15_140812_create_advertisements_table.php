@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('kilometer');
             $table->string('license_plate');
             $table->integer('build_year');
-            $table->string('body');
             $table->string('fuel');
             $table->string('transmission');
             $table->string('color');
@@ -32,6 +31,7 @@ return new class extends Migration
             $table->string('fuel_usage');
             $table->string('cylinder_capacity');
             $table->integer('weight');
+            $table->json('')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

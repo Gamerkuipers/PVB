@@ -21,7 +21,7 @@ class Advertisement extends Model
         return $this->hasMany(File::class);
     }
 
-    public function thumbnail(): File
+    public function thumbnail(): File|null
     {
         return $this->files->firstWhere('thumbnail', 1);
     }

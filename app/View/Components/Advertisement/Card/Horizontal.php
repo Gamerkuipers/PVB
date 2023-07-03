@@ -12,7 +12,7 @@ class Horizontal extends Component
 {
     public Advertisement $advertisement;
 
-    public File $thumbnail;
+    public File|null $thumbnail;
     /**
      * Create a new component instance.
      */

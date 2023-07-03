@@ -4,8 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "791d5f30503e80e1ba782d3f2d564568",
+    "content-hash": "f2d94d12792c29d81583a4afcc46614b",
     "packages": [
+        {
+            "name": "allejo/php-soda",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/allejo/PhpSoda.git",
+                "reference": "51773a563ae73f4b2ae8b72237b37eb43d51b622"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/allejo/PhpSoda/zipball/51773a563ae73f4b2ae8b72237b37eb43d51b622",
+                "reference": "51773a563ae73f4b2ae8b72237b37eb43d51b622",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "2.*",
+                "phpunit/phpunit": "~5.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "allejo\\Socrata\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vladimir Jimenez",
+                    "homepage": "https://allejo.io",
+                    "role": "Project Maintainer"
+                }
+            ],
+            "description": "A PHP library for working with the Socrata API",
+            "support": {
+                "irc": "irc://irc.freenode.net/socrata-soda",
+                "issues": "https://github.com/allejo/PhpSoda/issues",
+                "source": "https://github.com/allejo/PhpSoda",
+                "wiki": "https://github.com/allejo/PhpSoda/wiki"
+            },
+            "time": "2019-06-25T01:38:21+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.11.0",

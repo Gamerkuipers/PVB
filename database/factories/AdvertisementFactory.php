@@ -26,9 +26,6 @@ class AdvertisementFactory extends Factory
             'kilometer' => $this->faker->numberBetween(),
             'license_plate' => $this->faker->word(),
             'build_year' => $this->faker->year(),
-            'body' => $this->faker->randomElement([
-                'Cabriolet', 'Hatchback', 'Sedan', 'Stationwagon'
-            ]),
             'fuel' => $this->faker->randomElement([
                 'Benzine', 'Diesel', 'Elektrisch'
             ]),
