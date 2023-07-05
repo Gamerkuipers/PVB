@@ -16,6 +16,10 @@ class Advertisement extends Model
         'id',
     ];
 
+    protected $casts = [
+      'created_at' => 'datetime'
+    ];
+
     public function files(): HasMany
     {
         return $this->hasMany(File::class);
@@ -23,6 +27,6 @@ class Advertisement extends Model
 
     public function thumbnail(): File|null
     {
-        return $this->files->firstWhere('thumbnail', 1);
+        return $this->files->firstWhere('thumbnail', 1) ?? $this->files->first();
     }
 }

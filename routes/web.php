@@ -34,7 +34,7 @@ Route::group([
     'controller' => AdvertisementController::class,
 ], function () {
    Route::get('/', 'index')->name('index');
-   Route::get('/show', 'show')->name('show');
+   Route::get('/{advertisement}', 'show')->name('show');
 });
 
 require __DIR__.'/dashboard.php';

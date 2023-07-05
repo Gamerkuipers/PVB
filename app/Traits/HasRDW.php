@@ -28,6 +28,9 @@ trait HasRDW
         $this->apiFuelDataset = new SodaDataset($this->apiClient, $this->apiDatasetFuelName);
     }
 
+    /**
+     * Replace '-' or ' ' or '_' with '' in the license plate
+     */
     protected function getLicensePlate(string &$licensePlate): void
     {
         $licensePlate  = preg_replace('/[- _]/', '', $licensePlate);
@@ -46,7 +49,7 @@ trait HasRDW
 
         $fuel = $this->executeGetData($this->apiFuelDataset,"kenteken={$licensePlate}");
 
-        return $fuel !== null ? $fuel[0] : null;
+        return $fuel[0] ?? null;
     }
 
     protected function executeGetData(SodaDataset $dataset, string $filterOrQuery = ''): array|null

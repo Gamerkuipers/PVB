@@ -22,33 +22,45 @@
         </h1>
     @endisset
 
-    {{-- preview + info --}}
-    <div class="grid md:grid-cols-2">
-        @isset($thumbnail)
-            {{ $thumbnail }}
-        @else
-            <img src="{{ asset($advertisement->thumbnail()?->location) }}" alt="">
-        @endisset
-        <div class="flex flex-col items-end p-4 text-2xl font-bold">
-            <p>
-                {{ $advertisement->brand }}
-            </p>
-            @isset($price)
-                {{ $price }}
-            @else
-                <p>
-                    €{{ $advertisement->price }}
-                </p>
-            @endisset
-        </div>
-    </div>
 
-    {{-- All images --}}
-    <div>
-        <div class="flex gap-4 overflow-x-auto">
-            @foreach ($advertisement->files as $file)
-                <img src="{{ asset($file->location) }}" alt="" class="w-32">
-            @endforeach
+    <div class="space-y-6"
+         x-data="{currentPreview: '{{ asset("storage/{$advertisement->thumbnail()?->location}") }}'}">
+        {{-- preview + info --}}
+        <div class="grid md:grid-cols-2">
+            @isset($previewImage)
+                {{ $previewImage }}
+            @else
+                <img :src="currentPreview" alt="">
+            @endisset
+            <div class="flex flex-col items-end p-4 text-2xl font-bold">
+                <p>
+                    {{ $advertisement->brand }}
+                </p>
+                @isset($price)
+                    {{ $price }}
+                @else
+                    <p>
+                        €{{ $advertisement->price }}
+                    </p>
+                @endisset
+            </div>
+        </div>
+
+        {{-- All images --}}
+        <div>
+            <div class="flex gap-4 overflow-x-auto">
+
+                @isset($previewSelection)
+                    {{ $previewSelection }}
+                @else
+                    @foreach ($advertisement->files as $file)
+                        <div class="cursor-pointer relative"
+                             @click.prevent="currentPreview = '{{ asset("storage/$file->location") }}'">
+                            <img src="{{ asset("storage/$file->location") }}" alt="" class="h-20 object-cover">
+                        </div>
+                    @endforeach
+                @endisset
+            </div>
         </div>
     </div>
 

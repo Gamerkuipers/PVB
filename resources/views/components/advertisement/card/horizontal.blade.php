@@ -1,6 +1,6 @@
 <div {{ $attributes->class(['bg-primary flex text-text lg:flex-row flex-col']) }}>
     <div class="relative lg:w-3/4">
-        <img src="{{ asset($thumbnail?->location) }}" class="object-cover h-full w-full" alt="">
+        <img src="{{ asset("storage/{$advertisement->thumbnail()?->location}") }}" class="h-64 object-cover w-full" alt="">
         <span class="absolute bottom-0 right-0 bg-primary px-4 py-2 rounded-tl-xl font-bold text-2xl">
             €{{ $advertisement->price }}
         </span>
@@ -26,7 +26,7 @@
             @isset($action)
                 {{ $action }}
             @else
-                <x-link class="text-xl" :href="route('advertisement.show')">
+                <x-link class="text-xl" :href="route('advertisement.show', $advertisement)">
                     {{ __('View ad') }}
                     <x-icon.arrow-right></x-icon.arrow-right>
                 </x-link>

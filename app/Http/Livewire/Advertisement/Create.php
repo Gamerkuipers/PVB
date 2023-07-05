@@ -7,20 +7,30 @@ use App\Traits\HasAlerts;
 use App\Traits\HasRDW;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Redirector;
+use Livewire\WithFileUploads;
 
 class Create extends Component
 {
     use HasAlerts,
-        HasRDW;
+        HasRDW,
+        WithFileUploads;
 
     public string $licensePlate = '';
 
     public string $title = '';
 
     public string $price = '';
+
+    public array $extra = [];
+
+    public $newFileUploads = [];
+
+    public $tempFiles = [];
 
     public array $carData = [
         'brand' => 'N/A',
@@ -46,6 +56,11 @@ class Create extends Component
         'licensePlate' => ['required', 'string', 'max:255'],
         'title' => ['required', 'string', 'max:255'],
         'price' => ['required', 'string', 'max:255'],
+        'tempFiles.*' => ['image', 'max:10240'],
+    ];
+
+    protected $validationAttributes = [
+      'tempFiles.*' => 'files',
     ];
 
     public function render(): View
@@ -53,14 +68,58 @@ class Create extends Component
         return view('livewire.advertisement.create');
     }
 
+    public function getPreviewIndexProperty(): int
+    {
+        return array_key_first($this->tempFiles);
+    }
+
     public function updatedLicensePlate(): void
     {
         $this->getCarData();
     }
 
+    /**
+     * Validate each file that is uploaded. If its valid add to the tempFiles
+     */
+    public function updatedNewFileUploads(): void
+    {
+        $hasError = false;
+
+        $validator = Validator::make([], [
+            'file' => ['image', 'max:10240'],
+        ]);
+
+        foreach($this->newFileUploads as $file) {
+            if($validator->setData(['file' => $file])->valid()) {
+                $this->tempFiles[] = $file;
+            } else {
+                $hasError = true;
+            }
+        }
+
+        if($hasError) {
+            $this->addError('newFileUploads', __('Some images were unable to upload.'));
+        }
+
+        $this->reset(['newFileUploads']);
+    }
+
+    public function removeTempFile(int $index): void
+    {
+        $file = $this->tempFiles[$index];
+
+        if(!$file) return;
+
+        unset($this->tempFiles[$index]);
+
+        $file->delete();
+    }
+
     public function getCarData(): void
     {
         $this->resetErrorBag('licensePlate');
+
+        $this->validateOnly('licensePlate');
 
         $data = $this->getDataOnLicensePlate($this->licensePlate);
 
@@ -78,7 +137,10 @@ class Create extends Component
         $this->carData['name'] = $data['handelsbenaming'] ?? 'N/A';
         $this->carData['type'] = $data['type'] ?? 'N/A';
         $this->carData['license_plate'] = $data['kenteken'] ?? 'N/A';
-        $this->carData['build_year'] = Carbon::create($data['datum_eerste_toelating_dt'])->format('Y');
+        $this->carData['build_year'] =
+            isset($data['datum_eerste_toelating_dt'])
+                ? Carbon::create($data['datum_eerste_toelating_dt'])->format('Y')
+                : 'N/A';
         $this->carData['color'] =
             $data['tweede_kleur'] !== 'Niet geregistreerd'
                 ? $data['tweede_kleur']
@@ -87,11 +149,13 @@ class Create extends Component
                 : 'N/A');
         $this->carData['doors'] = $data['aantal_deuren'] ?? 'N/A';
         $this->carData['seating'] = $data['aantal_zitplaatsen'] ?? 'N/A';
-        $this->carData['apk_expire_date'] = Carbon::create($data['vervaldatum_apk_dt'])->format('Y M');
+        $this->carData['apk_expire_date'] =
+            isset($data['vervaldatum_apk_dt'])
+                ? Carbon::create($data['vervaldatum_apk_dt'])->format('Y M')
+                : 'N/A';
         $this->carData['kilometer'] = $data['tellerstandoordeel'] ?? 'N/A';
         $this->carData['fuel'] = $fuelData['brandstof_omschrijving'] ?? 'N/A';
         $this->carData['btw'] = $data['wam_verzekerd'] ?? 'N/A';
-//        $this->carData['transmission']; niet van toe passing
         $this->carData['power'] = $data['vermogen_massarijklaar'] ?? 'N/A';
         $this->carData['weight'] = $data['massa_rijklaar'] ?? 'N/A';
         $this->carData['fuel_usage'] = $fuelData['brandstofverbruik_gecombineerd'] ?? 'N/A';
@@ -102,7 +166,7 @@ class Create extends Component
     {
         $this->validate();
 
-        if($advertisement = $creator->create($this->title, $this->price, $this->carData)) {
+        if ($advertisement = $creator->create($this->title, $this->price, $this->carData, $this->tempFiles)) {
             return $this->flashSuccess(__('Successfully created advertisement!'), route('dashboard.advertisement.show', $advertisement));
         }
 

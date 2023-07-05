@@ -1,5 +1,4 @@
 <x-advertisement.display-layout :advertisement="$advertisement">
-    @dump($errors)
     <x-slot:actions>
         <div class="flex items-center justify-end">
             <div class="flex items-center gap-4">
@@ -18,6 +17,25 @@
             <x-form.error for="advertisement.description"></x-form.error>
         </div>
     </x-slot:description>
+
+    <x-slot:previewImage>
+        <div class="relative">
+            <x-delete-button class="absolute top-2 right-2"/>
+            <img :src="currentPreview" alt="">
+        </div>
+    </x-slot:previewImage>
+
+    <x-slot:previewSelection>
+        @foreach($advertisement->files as $file)
+            <div class="relative">
+                <div class="cursor-pointer relative"
+                     @click.prevent="currentPreview = '{{ asset("storage/$file->location") }}'">
+                    <img src="{{ asset("storage/$file->location") }}" alt="" class="h-20 object-cover">
+                </div>
+                <x-delete-button class="top-2 right-2 absolute"></x-delete-button>
+            </div>
+        @endforeach
+    </x-slot:previewSelection>
 
     <x-slot:price>
         <div class="space-y-1">

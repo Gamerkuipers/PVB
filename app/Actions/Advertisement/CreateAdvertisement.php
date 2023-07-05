@@ -3,12 +3,13 @@
 namespace App\Actions\Advertisement;
 
 use App\Models\Advertisement;
+use App\Models\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class CreateAdvertisement
 {
-    public function create(string $title, string $price, array $data): Advertisement|null
+    public function create(string $title, string $price, array $data, array $files): Advertisement|null
     {
 //        Gate::authorize('create', Advertisement::class);
 
@@ -39,6 +40,28 @@ class CreateAdvertisement
             'cylinder_capacity' =>  ['required', 'string', 'max:255'],
         ]);
 
-        return DB::transaction(fn() => Advertisement::create($validated));
+        $advertisement =  DB::transaction(fn() => Advertisement::create($validated));
+
+        if(!$advertisement) return null;
+
+        $fileValidator = Validator::make([],[
+            'file' => ['image', 'max:10240'],
+        ]);
+
+        foreach ($files as $file) {
+            $fileValidator->setData(['file' => $file]);
+
+            if($fileValidator->valid()) {
+                $storedFileLocation = $file->store("advertisement/{$advertisement->id}", 'public');
+
+                $fileObject = File::make([
+                    'location' => $storedFileLocation,
+                ]);
+
+                DB::transaction(fn() => $advertisement->files()->save($fileObject));
+            }
+        }
+
+        return $advertisement;
     }
 }
