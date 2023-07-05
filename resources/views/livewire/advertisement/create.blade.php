@@ -28,7 +28,7 @@
                     <div class="text-gray-400">
                         {{ __('No files have been uploaded') }}
                     </div>
-                    <x-link class="text-blue-500 border-b-0" x-data @click="$dispatch('opennewfileuploads')">
+                    <x-link class="!text-blue-500 hover:!text-secondary border-b-0" x-data @click="$dispatch('opennewfileuploads')">
                         {{ __('Click here to upload') }}
                     </x-link>
                 </div>

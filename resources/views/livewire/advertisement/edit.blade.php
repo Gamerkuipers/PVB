@@ -20,17 +20,17 @@
 
     <x-slot:previewImage>
         <div class="relative">
-            <x-delete-button class="absolute top-2 right-2"/>
+            <x-delete-button class="absolute top-2 right-2" wire:click="removeFile({{ json_encode($currentPreview) }})"/>
             <img :src="currentPreview" alt="">
         </div>
     </x-slot:previewImage>
 
     <x-slot:previewSelection>
-        @foreach($advertisement->files as $file)
+        @foreach($this->files as $file)
             <div class="relative">
                 <div class="cursor-pointer relative"
-                     @click.prevent="currentPreview = '{{ asset("storage/$file->location") }}'">
-                    <img src="{{ asset("storage/$file->location") }}" alt="" class="h-20 object-cover">
+                     @click.prevent="currentPreview = '{{ $this->getFileLocation($file) }}'" wire:click="setCurrentPreview({{ $file }})">
+                    <img src="{{ $this->getFileLocation($file) }}" alt="" class="h-20 object-cover">
                 </div>
                 <x-delete-button class="top-2 right-2 absolute"></x-delete-button>
             </div>
