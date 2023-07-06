@@ -11,36 +11,40 @@
         </div>
     </div>
 
-    <div x-data="{isOpen: false}" class="max-w-sm">
-        <x-link-inverted class="text-lg font-bold" @click="isOpen = !isOpen">
-            <p x-cloak x-show="!isOpen">{{ __('Open add new contact') }}</p>
-            <p x-cloak x-show="isOpen">{{ __('Hide Add new contact') }}</p>
-        </x-link-inverted>
-        <form class="py-4 space-y-2 ml-2" wire:submit.prevent="addNewContact" x-cloak x-show="isOpen">
-            <x-form.input-cluster
-                name="newContactName"
-                :label="__('Name')"
-                :placeholder="__('Name')"
-                wire:model="newContactName"
-            />
+    @can('create', \App\Models\Contact::class)
+        <div x-data="{isOpen: false}" class="max-w-sm">
+            <x-link-inverted class="text-lg font-bold" @click="isOpen = !isOpen">
+                <p x-cloak x-show="!isOpen">{{ __('Open add new contact') }}</p>
+                <p x-cloak x-show="isOpen">{{ __('Hide Add new contact') }}</p>
+            </x-link-inverted>
+            <form class="py-4 space-y-2 ml-2" wire:submit.prevent="addNewContact" x-cloak x-show="isOpen">
+                <x-form.input-cluster
+                    name="newContactName"
+                    :label="__('Name')"
+                    :placeholder="__('Name')"
+                    wire:model="newContactName"
+                />
 
-            <x-form.input-cluster
-                name="newContactBody"
-                :label="__('Content')"
-                :placeholder="__('Content')"
-                wire:model="newContactBody"
-            />
+                <x-form.input-cluster
+                    name="newContactBody"
+                    :label="__('Content')"
+                    :placeholder="__('Content')"
+                    wire:model="newContactBody"
+                />
 
-            <x-primary-button type="submit">{{ __('Add') }}</x-primary-button>
-        </form>
-    </div>
+                <x-primary-button type="submit">{{ __('Add') }}</x-primary-button>
+            </form>
+        </div>
+    @endcan
     <div class="divide-y-2 divide-primary max-w-sm">
         @foreach($contacts as $index => $contact)
             <div class="space-y-2 py-4">
                 <div class="flex justify-between items-center">
                     <h2 class="text-2xl font-bold">{{ $contact->name }}</h2>
 
-                    <x-delete-button wire:click="deleteContact({{ $index }})"/>
+                    @can('delete', \App\Models\Contact::class)
+                        <x-delete-button wire:click="deleteContact({{ $index }})"/>
+                    @endcan
                 </div>
 
                 <div class="pl-2">

@@ -11,7 +11,7 @@ class CreateContact
 {
     public function create(string $name, string $body): Contact|null
     {
-//        Gate::authorize('create', Contact::class);
+        Gate::authorize('create', Contact::class);
 
         $validated = Validator::validate([
             'name' => $name,

@@ -12,7 +12,7 @@ class UpdateContacts
 {
     public function update(Collection $contacts): bool
     {
-//        Gate::authorize('update', Contact::class);
+        Gate::authorize('update', Contact::class);
 
         Validator::validate(['contacts' => $contacts->toArray()], [
             'contacts.*.name' => ['string', 'max:255'],

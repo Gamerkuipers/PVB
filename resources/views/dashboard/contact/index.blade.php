@@ -4,9 +4,11 @@
             <h1 class="font-bold text-4xl">{{ __('Contact') }}</h1>
 
             {{-- Action group --}}
-            <a href="{{ route('dashboard.contact.edit') }}">
-                <x-primary-button>{{ __('Edit') }}</x-primary-button>
-            </a>
+            @can('update', \App\Models\Contact::class)
+                <a href="{{ route('dashboard.contact.edit') }}">
+                    <x-primary-button>{{ __('Edit') }}</x-primary-button>
+                </a>
+            @endcan
         </div>
         <div class="divide-y-2 divide-primary w-fit">
             @foreach($contacts as $contact)

@@ -2,7 +2,7 @@
     <div class="space-y-4">
         <x-nav-group-dashboard :title="__('Advertisement')">
             <x-slot:icon>
-                <x-icon.book />
+                <x-icon.book/>
             </x-slot:icon>
             <x-nav-link-dashboard route="dashboard.advertisement.index">
                 {{ __('List') }}
@@ -18,7 +18,7 @@
 
         <x-nav-group-dashboard :title="__('About')">
             <x-slot:icon>
-                <x-icon.info />
+                <x-icon.info/>
             </x-slot:icon>
             <x-nav-link-dashboard route="dashboard.about.index">
                 {{ __('View') }}
@@ -30,14 +30,18 @@
 
         <x-nav-group-dashboard :title="__('Contact')">
             <x-slot:icon>
-                <x-icon.at-sign />
+                <x-icon.at-sign/>
             </x-slot:icon>
-            <x-nav-link-dashboard route="dashboard.contact.index">
-                {{ __('View') }}
-            </x-nav-link-dashboard>
-            <x-nav-link-dashboard route="dashboard.contact.edit">
-                {{ __('Edit') }}
-            </x-nav-link-dashboard>
+            @can('viewAny', \App\Models\Contact::class)
+                <x-nav-link-dashboard route="dashboard.contact.index">
+                    {{ __('View') }}
+                </x-nav-link-dashboard>
+            @endcan
+            @can('update', \App\Models\Contact::class)
+                <x-nav-link-dashboard route="dashboard.contact.edit">
+                    {{ __('Edit') }}
+                </x-nav-link-dashboard>
+            @endcan
         </x-nav-group-dashboard>
     </div>
 </nav>
