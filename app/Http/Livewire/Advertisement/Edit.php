@@ -48,6 +48,8 @@ class Edit extends Component
 
     public function render(): View
     {
+        if(!$this->currentPreview) $this->resetCurrentPreview();
+
         return view('livewire.advertisement.edit');
     }
 
@@ -145,9 +147,11 @@ class Edit extends Component
     {
         $this->validate();
 
-        if ($this->advertisement->isClean()
-            || $updater->update($this->advertisement)
+        if (($this->advertisement->isClean() && empty($this->uploadedFiles) && $this->filesToDelete->isEmpty())
+            || $updater->update($this->advertisement, $this->filesToDelete, $this->uploadedFiles)
         ) {
+
+
             return $this->flashSuccess(__('Successfully updated advertisement!'), route('dashboard.advertisement.show', $this->advertisement));
         }
 

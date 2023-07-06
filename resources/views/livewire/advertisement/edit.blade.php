@@ -20,7 +20,7 @@
 
     <x-slot:previewImage>
         <div class="relative">
-            @if(!empty($this->files))
+            @if($this->files->isNotEmpty())
                 @if($currentPreview::class === \Livewire\TemporaryUploadedFile::class)
                     <x-delete-button class="absolute top-2 right-2" wire:click="removeTempFile('{{ $currentPreview->getFilename() }}')"/>
                     <img src="{{ $currentPreview->temporaryUrl() }}" alt="">
