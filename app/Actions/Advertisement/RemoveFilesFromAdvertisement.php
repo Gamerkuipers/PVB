@@ -13,11 +13,11 @@ class RemoveFilesFromAdvertisement
 {
     public function removeFiles(Advertisement &$advertisement, Collection $files): bool
     {
-        $success = DB::transaction(fn() => File::destroy($files->pluck('id')));
+        $success = DB::transaction(fn() => $advertisement->files()->whereIn('id', $files->pluck('id'))->delete());
 
         if (!$success) return false;
 
-        Storage::delete($files->pluck('location'));
+        Storage::disk('public')->delete($files->pluck('location')->all());
 
         return true;
     }
