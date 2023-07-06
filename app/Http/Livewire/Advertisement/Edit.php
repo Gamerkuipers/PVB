@@ -8,7 +8,7 @@ use App\Models\File;
 use App\Traits\HasAlerts;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Collection as SupportCollection;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Redirector;
@@ -18,15 +18,17 @@ use Livewire\WithFileUploads;
 class Edit extends Component
 {
     use HasAlerts,
-    WithFileUploads;
+        WithFileUploads;
 
     public Advertisement $advertisement;
 
-    public array $currentPreview;
+    public $currentPreview;
 
     public Collection $advertisementFiles;
 
-    public SupportCollection $uploadedFiles;
+    public $uploadedFiles = [];
+
+    public $newFileUploads = [];
 
     public Collection $filesToDelete;
 
@@ -37,7 +39,7 @@ class Edit extends Component
     ];
 
     protected $validationAttributes = [
-      'advertisement.license_plate' => 'license plate',
+        'advertisement.license_plate' => 'license plate',
     ];
 
     protected $listeners = [
@@ -51,32 +53,44 @@ class Edit extends Component
 
     public function mount(): void
     {
-        $this->currentPreview = $this->advertisement->thumbnail()->toArray();
+        $this->currentPreview = $this->advertisement->thumbnail();
 
         $this->advertisementFiles = $this->advertisement->files;
-
-        $this->uploadedFiles = collect();
 
         $this->filesToDelete = new Collection();
     }
 
-    public function getFilesProperty(): SupportCollection
+    public function getFilesProperty(): \Illuminate\Support\Collection
     {
         return collect($this->advertisementFiles)->merge($this->uploadedFiles);
     }
 
-    public function removeFile($file)
+    public function removeFile(File $file): void
     {
-        if(isset($file['id'])) {
+        $this->filesToDelete->push($file);
 
-        } else {
+        $this->advertisementFiles->forget($this->advertisementFiles->where('id', $file['id'])->keys()->all());
 
-        }
+        if ($file['id'] === $this->currentPreview['id'] ?? null) $this->resetCurrentPreview();
     }
 
-    public function getFileLocation(File|TemporaryUploadedFile $file): string
+    public function removeTempFile(string $fileName): void
     {
-        return get_class($file) === File::class ? asset("storage/{$file->location}") : $file->temporaryUrl();
+        $file = $this->uploadedFiles[$fileName];
+
+        $file->delete();
+
+        unset($this->uploadedFiles[$fileName]);
+
+        if($this->currentPreview::class === TemporaryUploadedFile::class
+            && $this->currentPreview->getFileName() === $fileName
+        ) $this->resetCurrentPreview();
+    }
+
+    public function getFileLocation(File $file): string
+    {
+        return asset("storage/{$file->location}");
+
     }
 
     public function confirmCancelEditing(): void
@@ -89,23 +103,47 @@ class Edit extends Component
         return to_route('dashboard.advertisement.show', $this->advertisement);
     }
 
-    public function setCurrentPreview($file): void
+    public function resetCurrentPreview(): void
+    {
+        $this->currentPreview = $this->files->first();
+    }
+
+    public function setCurrentPreview(File $file): void
     {
         $this->currentPreview = $file;
     }
 
-    public function removeImage(File|TemporaryUploadedFile $file)
+    public function setCurrentPreviewTemp(string $fileName): void
     {
-        if(get_class($file) == File::class) {
-            $this->filesToDelete->push($file);
-        } else {
+        $this->currentPreview = $this->uploadedFiles[$fileName];
+    }
 
+    public function updatedNewFileUploads(): void
+    {
+        $hasError = false;
+
+        $validator = Validator::make([], [
+            'file' => ['image', 'max:10240'],
+        ]);
+
+        foreach ($this->newFileUploads as $file) {
+            if ($validator->setData(['file' => $file])->valid()) {
+                $this->uploadedFiles[$file->getFileName()] = $file;
+            } else {
+                $hasError = true;
+            }
         }
+
+        if ($hasError) {
+            $this->addError('newFileUploads', __('Some images were unable to upload.'));
+        }
+
+        $this->reset(['newFileUploads']);
     }
 
     public function save(UpdateAdvertisement $updater): Redirector|RedirectResponse|null
     {
-       $this->validate();
+        $this->validate();
 
         if ($this->advertisement->isClean()
             || $updater->update($this->advertisement)

@@ -46,6 +46,10 @@
             </div>
         </div>
 
+        @isset($uploadSection)
+            {{ $uploadSection }}
+        @endisset
+
         {{-- All images --}}
         <div>
             <div class="flex gap-4 overflow-x-auto">

@@ -24,24 +24,17 @@
                 <x-delete-button class="absolute top-2 right-2" wire:click="removeTempFile({{ $this->previewIndex }})"/>
                 <img src="{{ $tempFiles[$this->previewIndex]->temporaryUrl() }}" alt="">
             @else
-                <div class="bg-gray-200 w-full h-72 flex flex-col items-center justify-center">
-                    <div class="text-gray-400">
-                        {{ __('No files have been uploaded') }}
-                    </div>
-                    <x-link class="!text-blue-500 hover:!text-secondary border-b-0" x-data @click="$dispatch('opennewfileuploads')">
-                        {{ __('Click here to upload') }}
-                    </x-link>
-                </div>
+                <x-empty-file/>
             @endif
         </div>
         <div class="flex flex-col items-end p-4 text-2xl font-bold">
             <p>
-                N/A
+                {{ $carData['brand'] }}
             </p>
             <div class="space-y-1">
                 <div class="flex items-center gap-1">
                     €
-                    <x-form.input placeholder="29.000,00"
+                    <x-form.input :placeholder="__('29.000,00')"
                                   name="price"
                                   wire:model="price"/>
                 </div>
@@ -54,10 +47,10 @@
     <div class="flex justify-end" x-data>
         <x-form.input type="file" class="hidden" wire:model="newFileUploads" x-ref="new_file_uploads"
                       @opennewfileuploads.window="$el.click()" accept="image/png, image/jpeg, image/jpg"
-                      multiple></x-form.input>
+                      multiple/>
         <div>
-        <x-link-inverted class="w-fit"
-                         @click.prevent="$refs.new_file_uploads.click()">{{ __('Add images') }}</x-link-inverted>
+            <x-link-inverted class="w-fit"
+                             @click.prevent="$refs.new_file_uploads.click()">{{ __('Add images') }}</x-link-inverted>
             <x-form.error for="newFileUploads"></x-form.error>
             <x-form.error for="newFileUploads.*"></x-form.error>
             <div wire:loading wire:target="newFileUploads" class="text-orange-500">
