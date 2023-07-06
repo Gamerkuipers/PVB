@@ -1,6 +1,10 @@
 <div {{ $attributes->class(['bg-primary flex flex-col']) }}>
     <div class="relative">
-        <img src="{{ asset("storage/{$advertisement->thumbnail()?->location}") }}" class="object-fill" alt="">
+        @if($advertisement->thumbnail() != null)
+            <img src="{{ asset("storage/{$advertisement->thumbnail()?->location}") }}" class="object-fill" alt="">
+        @else
+            <x-no-file-preview/>
+        @endisset
         <span class="absolute bottom-0 right-0 bg-primary px-4 py-2 rounded-tl-xl font-bold text-2xl">
             €{{ $advertisement->price }}
         </span>

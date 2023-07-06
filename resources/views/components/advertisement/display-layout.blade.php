@@ -24,13 +24,16 @@
 
 
     <div class="space-y-6"
-         x-data="{currentPreview: '{{ asset("storage/{$advertisement->thumbnail()?->location}") }}'}">
+         x-data="{currentPreview: '{{ $advertisement->thumbnail() != null ? asset("storage/{$advertisement->thumbnail()?->location}") : ''}}'}">
         {{-- preview + info --}}
         <div class="grid md:grid-cols-2">
             @isset($previewImage)
                 {{ $previewImage }}
             @else
-                <img :src="currentPreview" alt="">
+
+                <img :src="currentPreview" alt="" x-cloak x-show="currentPreview !== ''">
+
+                <x-no-file-preview x-cloak x-show="currentPreview === ''"/>
             @endisset
             <div class="flex flex-col items-end p-4 text-2xl font-bold">
                 <p>

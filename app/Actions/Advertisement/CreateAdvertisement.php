@@ -13,6 +13,8 @@ class CreateAdvertisement
     {
 //        Gate::authorize('create', Advertisement::class);
 
+        $fileAdder = new AddFilesToAdvertisement;
+
         $data = array_merge([
             'description' => $title,
             'price' => $price,
@@ -44,23 +46,7 @@ class CreateAdvertisement
 
         if(!$advertisement) return null;
 
-        $fileValidator = Validator::make([],[
-            'file' => ['image', 'max:10240'],
-        ]);
-
-        foreach ($files as $file) {
-            $fileValidator->setData(['file' => $file]);
-
-            if($fileValidator->valid()) {
-                $storedFileLocation = $file->store("advertisement/{$advertisement->id}", 'public');
-
-                $fileObject = File::make([
-                    'location' => $storedFileLocation,
-                ]);
-
-                DB::transaction(fn() => $advertisement->files()->save($fileObject));
-            }
-        }
+        $fileAdder->addFiles($advertisement, collect($files));
 
         return $advertisement;
     }
