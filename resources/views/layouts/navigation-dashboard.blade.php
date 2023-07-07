@@ -54,10 +54,15 @@
             @endcan
         </x-nav-group-dashboard>
     </div>
-    <form class="flex gap-2 justify-end items-center cursor-pointer transition-transform duration-500 hover:-translate-x-3"
-        method="POST" action="{{ route('logout') }}" x-data @click="$el.submit()">
-        @csrf
-        <span class="hidden md:block">{{ __('Log out') }}</span>
-        <x-icon.log-out></x-icon.log-out>
-    </form>
+    <div class="flex flex-col sm:flex-row gap-4 justify-between">
+        <x-link class="!border-0 hover:animate-bounce" :href="route('profile.edit')">
+            <x-icon.account></x-icon.account>
+        </x-link>
+        <form class="flex gap-2 justify-end items-center cursor-pointer transition-transform duration-500 hover:-translate-x-3 hover:text-secondary"
+              method="POST" action="{{ route('logout') }}" x-data @click="$el.submit()">
+            @csrf
+            <span class="hidden md:block">{{ __('Log out') }}</span>
+            <x-icon.log-out></x-icon.log-out>
+        </form>
+    </div>
 </nav>
