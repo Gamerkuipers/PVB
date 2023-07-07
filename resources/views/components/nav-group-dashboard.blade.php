@@ -15,8 +15,8 @@
         {{  $slot }}
     </div>
 
-    <div class="block sm:hidden absolute right-0 top-0 !m-0 text-center inset-x-0">
-        <div x-show="open" class="p-2 bg-primary" @click.outside="open = false">
+    <div class="flex sm:hidden absolute top-0 !m-0 text-center inset-x-0 w-screen">
+        <div x-show="open" x-cloak class="p-2 bg-primary w-full" @click.outside="open = false">
             <div class="flex gap-2 justify-center">
                 <h2 class="text-2xl font-bold">{{ $title }}</h2>
                 <x-icon.cross class="cursor-pointer hover:rotate-90 transition-transform duration-300" @click="open = false"/>

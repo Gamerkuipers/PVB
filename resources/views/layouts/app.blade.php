@@ -18,13 +18,13 @@
 </head>
 <body class="font-sans bg-text antialiased">
 <div class="min-h-screen">
-    <div class="flex min-h-screen">
-        <div class="sm:w-1/5 flex">
+    <div class="grid grid-cols-12 min-h-screen">
+        <div class="sm:col-span-2 lg:col-span-3 xl:col-span-2 2xl:col-span-1 flex">
             <x-navigation-dashboard/>
         </div>
 
         <!-- Page Content -->
-        <main class="w-full">
+        <main class="col-span-11 sm:col-span-10 lg:col-span-9 xl:col-span-10 2xl:col-span-11">
             {{ $slot }}
         </main>
     </div>
