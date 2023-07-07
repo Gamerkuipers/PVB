@@ -77,7 +77,7 @@
     <h2 class="font-bold text-4xl text-center">{{ __('Specifications') }}</h2>
     <div class="flex flex-col grow-0 w-fit">
         <x-form.input-cluster name="licensePlate"
-                              class="w-40"
+                              class="w-40 uppercase"
                               wire:model.debounce.500ms="licensePlate"
                               :placeholder="__('License Plate')"
                               :label="__('License Plate')"/>

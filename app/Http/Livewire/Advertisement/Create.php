@@ -81,6 +81,7 @@ class Create extends Component
 
     public function updatedLicensePlate(): void
     {
+        $this->licensePlate = strtoupper($this->licensePlate);
         $this->getCarData();
     }
 

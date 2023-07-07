@@ -6,19 +6,23 @@ use App\Actions\Advertisement\UpdateAdvertisement;
 use App\Models\Advertisement;
 use App\Models\File;
 use App\Traits\HasAlerts;
+use App\Traits\HasRDW;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Str;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Redirector;
 use Livewire\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
+use Carbon\Carbon;
 
 class Edit extends Component
 {
     use HasAlerts,
+        HasRDW,
         WithFileUploads;
 
     public Advertisement $advertisement;
@@ -70,6 +74,13 @@ class Edit extends Component
         $this->advertisementFiles = $this->advertisement->files;
 
         $this->filesToDelete = new Collection();
+    }
+
+
+    public function updatedAdvertisementLicensePlate(): void
+    {
+        $this->advertisement->license_plate = strtoupper($this->advertisement->license_plate);
+        $this->getCarData();
     }
 
     public function getFilesProperty(): \Illuminate\Support\Collection
@@ -157,6 +168,53 @@ class Edit extends Component
     {
         $this->extras->forget($index);
         $this->extras = $this->extras->values();
+    }
+
+
+    public function getCarData(): void
+    {
+        $this->resetErrorBag('advertisement.license_plate');
+
+        $this->validateOnly('advertisement.license_plate');
+
+        $data = $this->getDataOnLicensePlate($this->advertisement->license_plate);
+
+        if (!isset($data[0])) {
+            $this->addError('advertisement.license_plate', __('No information found.'));
+            return;
+        }
+
+        $data = $data[0];
+
+        $fuelData = $this->getFuelTypeOfLicensePlate($data['kenteken']);
+
+        $this->advertisement->brand = $data['merk'] ?? 'N/A';
+        $this->advertisement->name = $data['handelsbenaming'] ?? 'N/A';
+        $this->advertisement->type = $data['type'] ?? 'N/A';
+        $this->advertisement->license_plate = $data['kenteken'] ?? 'N/A';
+        $this->advertisement->build_year =
+            isset($data['datum_eerste_toelating_dt'])
+                ? Carbon::create($data['datum_eerste_toelating_dt'])->format('Y')
+                : 'N/A';
+        $this->advertisement->color =
+            $data['tweede_kleur'] !== 'Niet geregistreerd'
+                ? $data['tweede_kleur']
+                : ($data['eerste_kleur'] !== 'Niet geregistreerd'
+                ? $data['eerste_kleur']
+                : 'N/A');
+        $this->advertisement->doors = $data['aantal_deuren'] ?? 'N/A';
+        $this->advertisement->seating = $data['aantal_zitplaatsen'] ?? 'N/A';
+        $this->advertisement->apk_expire_date =
+            isset($data['vervaldatum_apk_dt'])
+                ? Carbon::create($data['vervaldatum_apk_dt'])->format('Y M')
+                : 'N/A';
+        $this->advertisement->kilometer = $data['tellerstandoordeel'] ?? 'N/A';
+        $this->advertisement->fuel = $fuelData['brandstof_omschrijving'] ?? 'N/A';
+        $this->advertisement->btw = $data['wam_verzekerd'] ?? 'N/A';
+        $this->advertisement->power = $data['vermogen_massarijklaar'] ?? 'N/A';
+        $this->advertisement->weight = $data['massa_rijklaar'] ?? 'N/A';
+        $this->advertisement->fuel_usage = $fuelData['brandstofverbruik_gecombineerd'] ?? 'N/A';
+        $this->advertisement->cylinder_capacity = $data['cilinderinhoud'] ?? 'N/A';
     }
 
     public function save(UpdateAdvertisement $updater): Redirector|RedirectResponse|null

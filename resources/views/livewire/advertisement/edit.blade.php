@@ -94,12 +94,17 @@
     </x-slot:price>
 
     <x-slot:licensePlate>
-        <x-form.input-cluster name="license_plate"
-                              wire:model.debounce.1s="advertisement.license_plate"
-                              :placeholder="__('License plate')"
-                              :label="__('License plate')"
-                              class="w-40"
-        ></x-form.input-cluster>
+        <div>
+            <x-form.input-cluster name="advertisement.license_plate"
+                                wire:model.debounce.1s="advertisement.license_plate"
+                                :placeholder="__('License plate')"
+                                :label="__('License plate')"
+                                class="w-40 uppercase"
+            ></x-form.input-cluster>
+            <div wire:loading wire:target="advertisement.license_plate" class="text-orange-500">
+                {{ __('Getting information') }}
+            </div>
+        </div>
     </x-slot:licensePlate>
 
     <x-slot:extrasList>
