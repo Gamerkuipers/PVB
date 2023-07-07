@@ -84,7 +84,10 @@
         <div class="space-y-1">
             <div class="flex items-center gap-2">
                 €
-                <x-form.input :placeholder="__('29.000,00')" wire:model="advertisement.price"/>
+                <x-form.input :placeholder="__('29.000,00')"
+                              x-data
+                              x-mask:dynamic="$money($input, ',')"
+                              wire:model="advertisement.price"/>
             </div>
             <x-form.error for="advertisement.price"></x-form.error>
         </div>

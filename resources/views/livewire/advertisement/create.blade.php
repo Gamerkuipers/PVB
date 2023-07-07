@@ -36,6 +36,8 @@
                     €
                     <x-form.input :placeholder="__('29.000,00')"
                                   name="price"
+                                  x-data
+                                  x-mask:dynamic="$money($input, ',')"
                                   wire:model="price"/>
                 </div>
 
