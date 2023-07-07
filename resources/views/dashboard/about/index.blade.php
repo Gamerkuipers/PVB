@@ -17,7 +17,7 @@
             </div>
             <div class="space-y-2 py-4">
                 <h2 class="text-2xl font-bold">{{ __('Content') }}</h2>
-                <p class="text-lg pl-2 whitespace-pre">{{ $about->body }}</p>
+                <p class="text-lg pl-2 whitespace-pre-line">{{ $about->body }}</p>
             </div>
         </div>
     </div>

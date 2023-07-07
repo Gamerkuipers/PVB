@@ -1,11 +1,11 @@
 <?php
 
+use App\Models\WebContent;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -14,10 +14,16 @@ return new class extends Migration
         Schema::create('web_contents', function (Blueprint $table) {
             $table->id();
             $table->string('key')->unique();
-            $table->string('head');
-            $table->text('body');
+            $table->string('head')->nullable();
+            $table->text('body')->nullable();
             $table->timestamps();
         });
+
+        foreach (config('defaults.web-content.keys') as $key) {
+            WebContent::create([
+                'key' => $key
+            ]);
+        }
     }
 
     /**
