@@ -7,8 +7,8 @@ use App\Models\Advertisement;
 use App\Models\File;
 use App\Traits\HasAlerts;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -35,6 +35,8 @@ class Edit extends Component
 
     public Collection $filesToDelete;
 
+    public bool $isSold = false;
+
     protected array $rules = [
         'advertisement.description' => ['required', 'string', 'max:65535'],
         'advertisement.price' => ['required', 'string', 'max:255'],
@@ -52,13 +54,15 @@ class Edit extends Component
 
     public function render(): View
     {
-        if(!$this->currentPreview) $this->resetCurrentPreview();
+        if (!$this->currentPreview) $this->resetCurrentPreview();
 
         return view('livewire.advertisement.edit');
     }
 
     public function mount(): void
     {
+        $this->isSold = $this->advertisement->trashed();
+
         $this->extras = $this->advertisement->extras;
 
         $this->currentPreview = $this->advertisement->thumbnail();
@@ -90,7 +94,7 @@ class Edit extends Component
 
         unset($this->uploadedFiles[$fileName]);
 
-        if($this->currentPreview::class === TemporaryUploadedFile::class
+        if ($this->currentPreview::class === TemporaryUploadedFile::class
             && $this->currentPreview->getFileName() === $fileName
         ) $this->resetCurrentPreview();
     }
@@ -161,8 +165,11 @@ class Edit extends Component
 
         $this->advertisement->extras = $this->extras;
 
-        if (($this->advertisement->isClean() && empty($this->uploadedFiles) && $this->filesToDelete->isEmpty())
-            || $updater->update($this->advertisement, $this->filesToDelete, $this->uploadedFiles)
+        if (($this->advertisement->isClean()
+                && empty($this->uploadedFiles)
+                && $this->filesToDelete->isEmpty()
+                && $this->advertisement->trashed() === $this->isSold)
+            || $updater->update($this->advertisement, $this->isSold, $this->filesToDelete, $this->uploadedFiles)
         ) {
             return $this->flashSuccess(__('Successfully updated advertisement!'), route('dashboard.advertisement.show', $this->advertisement));
         }

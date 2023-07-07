@@ -12,6 +12,7 @@ class AdvertisementController extends Controller
     public function index(): View
     {
         return view('dashboard.advertisement.index', [
+            'title' => 'All advertisements',
             'advertisements' => Advertisement::orderByDesc('created_at')->paginate(10),
         ]);
     }
@@ -32,6 +33,14 @@ class AdvertisementController extends Controller
     {
         return view('dashboard.advertisement.edit', [
             'advertisement' => $advertisement,
+        ]);
+    }
+
+    public function sold(): View
+    {
+        return view('dashboard.advertisement.index', [
+            'title' => __('All sold advertisements'),
+            'advertisements' => Advertisement::onlyTrashed()->orderByDesc('deleted_at')->paginate('10'),
         ]);
     }
 }

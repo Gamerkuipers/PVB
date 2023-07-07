@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UpdateAdvertisement
 {
-    public function update(Advertisement $advertisement, Collection $filesToDelete = new Collection, SupportCollection|array $newFiles = []): bool|Advertisement
+    public function update(Advertisement $advertisement, bool $isSold, Collection $filesToDelete = new Collection, SupportCollection|array $newFiles = []): bool|Advertisement
     {
         Gate::authorize('update', $advertisement);
 
@@ -37,6 +37,15 @@ class UpdateAdvertisement
         $newFiles = is_array($newFiles) ? collect($newFiles) : $newFiles;
 
         $fileAdder->addFiles($advertisement, $newFiles);
+
+
+        if($advertisement->trashed() != $isSold) {
+            if($isSold && Gate::check('delete', $advertisement)) {
+                $advertisement->delete();
+            } elseif(Gate::check('restore', $advertisement)) {
+                $advertisement->restore();
+            }
+        }
 
         return $advertisement;
     }

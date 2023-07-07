@@ -9,6 +9,12 @@
         <span class="absolute bottom-0 right-0 bg-primary px-4 py-2 rounded-tl-xl font-bold text-2xl">
             €{{ $advertisement->price }}
         </span>
+
+        @if($advertisement->trashed())
+            <div class="absolute top-4 left-4">
+                <x-advertisement.sold-tag/>
+            </div>
+        @endif
     </div>
     <div class="p-4 w-full flex flex-col gap-2 justify-between">
         <h2 class="font-bold text-xl">{{ $advertisement->description }}</h2>

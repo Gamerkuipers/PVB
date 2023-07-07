@@ -14,13 +14,18 @@
         </div>
     @endisset
     {{-- content --}}
-    @isset($description)
-        {{ $description }}
-    @else
-        <h1 class="font-bold text-2xl">
-            {{ $advertisement->description }}
-        </h1>
-    @endisset
+    <div class="flex gap-2 w-full items-center">
+        @isset($description)
+            {{ $description }}
+        @else
+            @if($advertisement->trashed())
+                <x-advertisement.sold-tag/>
+            @endif
+            <h1 class="font-bold text-2xl">
+                {{ $advertisement->description }}
+            </h1>
+        @endisset
+    </div>
 
 
     <div class="space-y-6"

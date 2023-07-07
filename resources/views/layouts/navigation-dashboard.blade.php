@@ -14,8 +14,8 @@
                     {{ __('Create') }}
                 </x-nav-link-dashboard>
             @endcan
-            @can('viewTrash', \App\Models\Advertisement::class)
-                <x-nav-link-dashboard>
+            @can('viewTrashed', \App\Models\Advertisement::class)
+                <x-nav-link-dashboard route="dashboard.advertisement.sold">
                     {{ __('Sold') }}
                 </x-nav-link-dashboard>
             @endcan

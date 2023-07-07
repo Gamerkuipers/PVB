@@ -9,7 +9,11 @@
     </x-slot:actions>
 
     <x-slot:description>
-        <div class="space-y-1">
+        <div class="space-y-1 w-full">
+            <div class="flex items-center justify-end gap-2 font-semibold">
+                <x-form.checkbox wire:model="isSold"/>
+                {{ __('Is sold?') }}
+            </div>
             <x-form.input class="w-full"
                           :placeholder="__('Titel')"
                           wire:model="advertisement.description"

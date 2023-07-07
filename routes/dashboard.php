@@ -25,16 +25,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 ->name('index')
                 ->can('viewAny', Advertisement::class);
 
+            Route::get('/sold', 'sold')
+                ->name('sold')
+                ->can('viewTrashed', Advertisement::class);
+
             Route::get('/create', 'create')
                 ->name('create')
                 ->can('create', Advertisement::class);
 
             Route::prefix('/{advertisement}')->group(function () {
                 Route::get('/', 'show')
+                    ->withTrashed()
                     ->name('show')
                     ->can('view', 'advertisement');
 
                 Route::get('/edit', 'edit')
+                    ->withTrashed()
                     ->name('edit');
             });
         });

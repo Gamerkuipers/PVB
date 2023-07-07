@@ -25,6 +25,14 @@ class AdvertisementPolicy
     }
 
     /**
+     * Determine whether the user can view any trashed models.
+     */
+    public function viewTrashed(): Response
+    {
+        return Response::allow();
+    }
+
+    /**
      * Determine whether the user can create models.
      */
     public function create(User $user): Response
@@ -45,7 +53,7 @@ class AdvertisementPolicy
      */
     public function delete(User $user, Advertisement $advertisement): Response
     {
-        return Response::deny();
+        return Response::allow();
     }
 
     /**
@@ -53,7 +61,7 @@ class AdvertisementPolicy
      */
     public function restore(User $user, Advertisement $advertisement): Response
     {
-        return Response::deny();
+        return Response::allow();
     }
 
     /**
