@@ -1,4 +1,4 @@
-<nav class="bg-primary p-4 space-y-4 text-text z-50 h-full fixed top-0 left-0">
+<nav class="bg-primary p-4 space-y-4 text-text z-50 h-full fixed top-0 left-0 flex flex-col justify-between">
     <div class="space-y-4">
         <x-nav-group-dashboard :title="__('Advertisement')">
             <x-slot:icon>
@@ -54,4 +54,10 @@
             @endcan
         </x-nav-group-dashboard>
     </div>
+    <form class="flex gap-2 justify-end items-center cursor-pointer transition-transform duration-500 hover:-translate-x-3"
+        method="POST" action="{{ route('logout') }}" x-data @click="$el.submit()">
+        @csrf
+        <span class="hidden md:block">{{ __('Log out') }}</span>
+        <x-icon.log-out></x-icon.log-out>
+    </form>
 </nav>
