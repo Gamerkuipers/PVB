@@ -1,4 +1,4 @@
-<div class="p-10 space-y-4">
+<div class="max-w-7xl mx-auto px-10 min-h-screen items-center py-20 space-y-4">
     <div class="flex w-full justify-between">
         <h1 class="font-bold text-4xl">{{ __('Contact') }}</h1>
 

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="p-10">
+    <div class="max-w-7xl mx-auto px-10 min-h-screen py-20">
         <div class="flex w-full justify-between">
             <h1 class="font-bold text-4xl">{{ __('Contact') }}</h1>
 

@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="flex max-w-screen-2xl p-10 mx-auto min-h-screen items-center flex-col md:flex-row">
-        <div class="grid grid-cols-3 gap-4 h-full">
+        <div class="grid md:grid-cols-3 grid-flow-row gap-4 h-full">
             @foreach($advertisements as $advertisement)
                 <div>
                     <x-advertisement.card.vertical :advertisement="$advertisement"/>
