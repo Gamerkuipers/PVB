@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Traits\HasAlerts;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -10,6 +11,8 @@ use Illuminate\Validation\Rules\Password;
 
 class PasswordController extends Controller
 {
+    use HasAlerts;
+
     /**
      * Update the user's password.
      */
@@ -24,6 +27,7 @@ class PasswordController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        return back()->with('status', 'password-updated');
+
+        return $this->flashSuccess(__('Successfully updated password'), url()->previous());
     }
 }
