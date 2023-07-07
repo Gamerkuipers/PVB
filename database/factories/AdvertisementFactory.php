@@ -47,7 +47,7 @@ class AdvertisementFactory extends Factory
             ]),
             'cylinder_capacity' => $this->faker->numberBetween(1900, 2000) . 'cc',
             'weight' => $this->faker->numberBetween(1300, 2000),
-            // TODO: add factory for extras
+            'extras' => $this->faker->randomElements(['Stoel verwarming', 'Dak raam', 'Bluetooth', 'Display'],rand(2,4)),
         ];
     }
 }
