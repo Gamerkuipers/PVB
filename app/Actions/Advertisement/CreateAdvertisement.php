@@ -5,13 +5,14 @@ namespace App\Actions\Advertisement;
 use App\Models\Advertisement;
 use App\Models\File;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class CreateAdvertisement
 {
     public function create(string $title, string $price, array $data, array $files): Advertisement|null
     {
-//        Gate::authorize('create', Advertisement::class);
+        Gate::authorize('create', Advertisement::class);
 
         $fileAdder = new AddFilesToAdvertisement;
 

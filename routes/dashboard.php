@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\AboutController;
 use App\Http\Controllers\Dashboard\AdvertisementController;
 use App\Http\Controllers\Dashboard\ContactController;
+use App\Models\Advertisement;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Route;
 
@@ -21,14 +22,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'controller' => AdvertisementController::class,
         ], function () {
             Route::get('/', 'index')
-                ->name('index');
+                ->name('index')
+                ->can('viewAny', Advertisement::class);
 
             Route::get('/create', 'create')
-                ->name('create');
+                ->name('create')
+                ->can('create', Advertisement::class);
 
             Route::prefix('/{advertisement}')->group(function () {
                 Route::get('/', 'show')
-                    ->name('show');
+                    ->name('show')
+                    ->can('view', 'advertisement');
 
                 Route::get('/edit', 'edit')
                     ->name('edit');

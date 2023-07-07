@@ -6,9 +6,11 @@
                     <x-icon.arrow-left></x-icon.arrow-left>
                     {{ __('Alle advertenties') }}
                 </x-link-inverted>
-                <a href="{{ route('dashboard.advertisement.edit', $advertisement) }}">
-                    <x-secondary-button>{{ __('Edit') }}</x-secondary-button>
-                </a>
+                @can('update', $advertisement)
+                    <a href="{{ route('dashboard.advertisement.edit', $advertisement) }}">
+                        <x-secondary-button>{{ __('Edit') }}</x-secondary-button>
+                    </a>
+                @endcan
             </div>
         </x-slot:actions>
     </x-advertisement.display-layout>

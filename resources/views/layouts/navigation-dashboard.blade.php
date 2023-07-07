@@ -4,15 +4,21 @@
             <x-slot:icon>
                 <x-icon.book/>
             </x-slot:icon>
-            <x-nav-link-dashboard route="dashboard.advertisement.index">
-                {{ __('List') }}
-            </x-nav-link-dashboard>
-            <x-nav-link-dashboard route="dashboard.advertisement.create">
-                {{ __('Create') }}
-            </x-nav-link-dashboard>
-            <x-nav-link-dashboard>
-                {{ __('Sold') }}
-            </x-nav-link-dashboard>
+            @can('viewAny', \App\Models\Advertisement::class)
+                <x-nav-link-dashboard route="dashboard.advertisement.index">
+                    {{ __('List') }}
+                </x-nav-link-dashboard>
+            @endcan
+            @can('create', \App\Models\Advertisement::class)
+                <x-nav-link-dashboard route="dashboard.advertisement.create">
+                    {{ __('Create') }}
+                </x-nav-link-dashboard>
+            @endcan
+            @can('viewTrash', \App\Models\Advertisement::class)
+                <x-nav-link-dashboard>
+                    {{ __('Sold') }}
+                </x-nav-link-dashboard>
+            @endcan
         </x-nav-group-dashboard>
 
 
