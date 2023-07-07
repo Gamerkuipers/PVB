@@ -9,7 +9,7 @@
                         <x-advertisement.card.horizontal :advertisement="$advertisement"/>
                     </div>
                     @empty
-                    <p>{{ __('There are currently no advertisements') }}</p>
+                    <h2 class="font-medium text-2xl text-primary text-center w-full">{{ __('Currently there are no cars for sale.') }}</h2>
                 @endforelse
             </div>
             {{  $advertisements->links() }}
