@@ -116,20 +116,27 @@
         </div>
 
         {{-- Extra's --}}
-        <div class="bg-primary p-6">
+        <div class="bg-primary p-6 space-y-2">
             <h2 class="font-bold text-xl text-center">
-                {{ __("Extra's") }}
+                {{ __("Extra information") }}
             </h2>
             <div class="space-y-1">
-                @for ($i = 0; $i < 5; $i++)
-                    <div class="flex gap-x-2 items-center">
-                        <x-form.input value="lorem ipsum" :placeholder="__('Extra specification')"/>
-                        <x-delete-button class="shrink-0"/>
+                @foreach ($extras as $index => $extra)
+                    <div wire:key="extras.{{ $index }}">
+                        <div class="flex gap-x-2 items-center">
+                            <x-form.input value="lorem ipsum"
+                                          wire:model="extras.{{ $index }}"
+                                          :placeholder="__('Extra specification')"/>
+                            <x-delete-button class="shrink-0 w-9 hover:w-10"/>
+                        </div>
+                        <x-form.error for="extras.{{ $index }}"></x-form.error>
                     </div>
-                @endfor
+                @endforeach
+                @php($nextIndex = isset($index) ? $index+1 : 0)
                 <div class="flex gap-x-2 items-center">
-                    <x-form.input :placeholder="__('Extra specification')"/>
-                    <x-primary-button>{{ __('Add') }}</x-primary-button>
+                    <x-form.input :placeholder="__('Start typing...')"
+                                  wire:key="newExtra"
+                                  wire:model.debounce.500ms="extras.{{ $nextIndex }}"/>
                 </div>
             </div>
         </div>

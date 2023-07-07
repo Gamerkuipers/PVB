@@ -4,13 +4,14 @@ namespace App\Actions\Advertisement;
 
 use App\Models\Advertisement;
 use App\Models\File;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class CreateAdvertisement
 {
-    public function create(string $title, string $price, array $data, array $files): Advertisement|null
+    public function create(string $title, string $price, array $data, array $files, array $extras): Advertisement|null
     {
         Gate::authorize('create', Advertisement::class);
 
@@ -19,6 +20,7 @@ class CreateAdvertisement
         $data = array_merge([
             'description' => $title,
             'price' => $price,
+            'extras' => $extras,
         ], $data);
 
         $validated = Validator::validate($data, [
@@ -41,6 +43,7 @@ class CreateAdvertisement
             'weight' =>  ['required', 'string', 'max:255'],
             'fuel_usage' =>  ['required', 'string', 'max:255'],
             'cylinder_capacity' =>  ['required', 'string', 'max:255'],
+            'extras.*' => ['sometimes', 'required', 'string', 'max:255'],
         ]);
 
         $advertisement =  DB::transaction(fn() => Advertisement::create($validated));

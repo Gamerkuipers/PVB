@@ -26,7 +26,7 @@ class Create extends Component
 
     public string $price = '';
 
-    public array $extra = [];
+    public Collection $extras;
 
     public $newFileUploads = [];
 
@@ -57,11 +57,17 @@ class Create extends Component
         'title' => ['required', 'string', 'max:255'],
         'price' => ['required', 'string', 'max:255'],
         'tempFiles.*' => ['image', 'max:10240'],
+        'extras.*' => ['sometimes', 'required', 'string', 'max:255'],
     ];
 
     protected $validationAttributes = [
       'tempFiles.*' => 'files',
     ];
+
+    public function mount(): void
+    {
+        $this->extras = collect();
+    }
 
     public function render(): View
     {
@@ -166,7 +172,7 @@ class Create extends Component
     {
         $this->validate();
 
-        if ($advertisement = $creator->create($this->title, $this->price, $this->carData, $this->tempFiles)) {
+        if ($advertisement = $creator->create($this->title, $this->price, $this->carData, $this->tempFiles, $this->extras->values()->all())) {
             return $this->flashSuccess(__('Successfully created advertisement!'), route('dashboard.advertisement.show', $advertisement));
         }
 

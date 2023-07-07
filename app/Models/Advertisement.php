@@ -17,7 +17,8 @@ class Advertisement extends Model
     ];
 
     protected $casts = [
-      'created_at' => 'datetime'
+        'created_at' => 'datetime',
+        'extras' => 'collection',
     ];
 
     public function files(): HasMany

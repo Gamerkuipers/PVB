@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('fuel_usage');
             $table->string('cylinder_capacity');
             $table->integer('weight');
-            $table->json('')->nullable();
+            $table->json('extras')->default('')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

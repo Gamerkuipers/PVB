@@ -112,17 +112,25 @@
             <x-advertisement.specification
                 :title="__('Cylinder capacity')">{{ $advertisement->cylinder_capacity }}</x-advertisement.specification>
         </div>
-        <div class="bg-primary p-6">
+        <div class="bg-primary p-6 space-y-2">
             <h2 class="font-bold text-xl text-center">
-                {{ __("Extra's") }}
+                {{ __("Extra information") }}
             </h2>
-            <ul class="list-disc list-inside">
-                @for ($i = 0; $i < 20; $i++)
-                    <li>
-                        Lorem Ipsum
-                    </li>
-                @endfor
-            </ul>
+            @isset($extrasList)
+                {{ $extrasList }}
+            @else
+                <ul class="list-disc list-inside">
+                    @forelse ($advertisement->extras as $extra)
+                        <li>
+                            {{ $extra }}
+                        </li>
+                    @empty
+                        <p>
+                            {{ __('There is no extra information') }}
+                        </p>
+                    @endforelse
+                </ul>
+            @endisset
         </div>
     </div>
 </div>

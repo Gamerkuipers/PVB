@@ -46,7 +46,8 @@ class AdvertisementFactory extends Factory
                 '5.2 l/100km', '5.0 l/100km', '5.3 l/100km'
             ]),
             'cylinder_capacity' => $this->faker->numberBetween(1900, 2000) . 'cc',
-            'weight' => $this->faker->numberBetween(1300, 2000)
+            'weight' => $this->faker->numberBetween(1300, 2000),
+            // TODO: add factory for extras
         ];
     }
 }

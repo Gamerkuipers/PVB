@@ -22,7 +22,8 @@
         <div class="relative">
             @if($this->files->isNotEmpty())
                 @if($currentPreview::class === \Livewire\TemporaryUploadedFile::class)
-                    <x-delete-button class="absolute top-2 right-2" wire:click="removeTempFile('{{ $currentPreview->getFilename() }}')"/>
+                    <x-delete-button class="absolute top-2 right-2"
+                                     wire:click="removeTempFile('{{ $currentPreview->getFilename() }}')"/>
                     <img src="{{ $currentPreview->temporaryUrl() }}" alt="">
                 @else
                     <x-delete-button class="absolute top-2 right-2"
@@ -87,10 +88,34 @@
 
     <x-slot:licensePlate>
         <x-form.input-cluster name="license_plate"
-                              wire:model.debounce.1000ms="advertisement.license_plate"
+                              wire:model.debounce.1s="advertisement.license_plate"
                               :placeholder="__('License plate')"
                               :label="__('License plate')"
                               class="w-40"
         ></x-form.input-cluster>
     </x-slot:licensePlate>
+
+    <x-slot:extrasList>
+        @foreach($extras as $index => $extra)
+            <div wire:key="advertisement.extras.{{ $index }}">
+                <div class="flex w-full gap-3 items-center">
+                    <x-form.input
+                        wire:model="extras.{{ $index }}"
+                        :placeholder="__('Extra')"
+                    ></x-form.input>
+                    <x-delete-button class="w-9 hover:w-10" wire:click="removeExtra({{ $index }})"/>
+                </div>
+                <x-form.error for="extras.{{ $index }}"></x-form.error>
+            </div>
+        @endforeach
+        @php($nextIndex = isset($index) ? $index+1 : 0)
+        <div>
+            <div class="flex w-full gap-3 items-center">
+                <x-form.input
+                    wire:model.debounce.500ms="extras.{{ $nextIndex }}"
+                    :placeholder="__('Start typing...')"
+                ></x-form.input>
+            </div>
+        </div>
+    </x-slot:extrasList>
 </x-advertisement.display-layout>

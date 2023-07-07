@@ -7,6 +7,7 @@ use App\Models\Advertisement;
 use App\Models\File;
 use App\Traits\HasAlerts;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
@@ -22,6 +23,8 @@ class Edit extends Component
 
     public Advertisement $advertisement;
 
+    public SupportCollection $extras;
+
     public $currentPreview;
 
     public Collection $advertisementFiles;
@@ -36,6 +39,7 @@ class Edit extends Component
         'advertisement.description' => ['required', 'string', 'max:65535'],
         'advertisement.price' => ['required', 'string', 'max:255'],
         'advertisement.license_plate' => ['required', 'string', 'max:255'],
+        'extras.*' => ['sometimes', 'required', 'string', 'max:255'],
     ];
 
     protected $validationAttributes = [
@@ -43,7 +47,7 @@ class Edit extends Component
     ];
 
     protected $listeners = [
-        'confirmedCancel' => 'cancelEditing'
+        'confirmedCancel' => 'cancelEditing',
     ];
 
     public function render(): View
@@ -55,6 +59,8 @@ class Edit extends Component
 
     public function mount(): void
     {
+        $this->extras = $this->advertisement->extras;
+
         $this->currentPreview = $this->advertisement->thumbnail();
 
         $this->advertisementFiles = $this->advertisement->files;
@@ -143,15 +149,21 @@ class Edit extends Component
         $this->reset(['newFileUploads']);
     }
 
+    public function removeExtra(int $index): void
+    {
+        $this->extras->forget($index);
+        $this->extras = $this->extras->values();
+    }
+
     public function save(UpdateAdvertisement $updater): Redirector|RedirectResponse|null
     {
         $this->validate();
 
+        $this->advertisement->extras = $this->extras;
+
         if (($this->advertisement->isClean() && empty($this->uploadedFiles) && $this->filesToDelete->isEmpty())
             || $updater->update($this->advertisement, $this->filesToDelete, $this->uploadedFiles)
         ) {
-
-
             return $this->flashSuccess(__('Successfully updated advertisement!'), route('dashboard.advertisement.show', $this->advertisement));
         }
 
