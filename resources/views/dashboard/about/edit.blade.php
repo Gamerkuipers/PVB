@@ -1,3 +1,7 @@
 <x-app-layout>
-    <livewire:about.edit></livewire:about.edit>
+    <livewire:web-content.edit
+        :webContent="$about"
+        :title="__('About')"
+        successRouteName="dashboard.about.index"
+    />
 </x-app-layout>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\About;
+namespace App\Http\Livewire\WebContent;
 
 use App\Actions\WebContent\UpdateWebContent;
 use App\Models\WebContent;
@@ -14,37 +14,36 @@ class Edit extends Component
 {
     use HasAlerts;
 
-    public WebContent $about;
+    public WebContent $webContent;
+
+    public string $title = '';
+
+    public string $successRouteName = 'dashboard';
 
     protected array $rules = [
-        'about.head' => ['required', 'string', 'max:255'],
-        'about.body' => ['required', 'string', 'max:65535'],
+        'webContent.head' => ['required', 'string', 'max:255'],
+        'webContent.body' => ['required', 'string', 'max:65535'],
     ];
 
     protected array $validationAttributes = [
-        'about.head' => 'Title',
-        'about.body' => 'Content',
+        'webContent.head' => 'Title',
+        'webContent.body' => 'Content',
     ];
 
     protected $listeners = [
       'cancelEditing'
     ];
 
-    public function mount(): void
-    {
-        $this->about = WebContent::firstWhere('key', 'about');
-    }
-
     public function render(): View
     {
-        return view('livewire.about.edit');
+        return view('livewire.web-content.edit');
     }
 
     public function save(UpdateWebContent $updater): Redirector|RedirectResponse|null
     {
         $this->validate();
-        if ($this->about->isClean() || $updater->update($this->about)) {
-            return $this->flashSuccess(__('Successfully saved about.'), route('dashboard.about.index'));
+        if ($this->webContent->isClean() || $updater->update($this->webContent)) {
+            return $this->flashSuccess(__('Successfully saved :title', ['title' => $this->title]), route($this->successRouteName));
         }
 
         $this->alertWarning(__('Something went wrong. Try again later.'));
@@ -67,6 +66,6 @@ class Edit extends Component
 
     public function cancelEditing(): RedirectResponse|Redirector
     {
-        return to_route('dashboard.about.index');
+        return to_route($this->successRouteName);
     }
 }

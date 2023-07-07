@@ -11,7 +11,7 @@ class UpdateWebContent
 {
     public function update(WebContent $content): bool|null
     {
-//        Gate::authorize('update', $content);
+        Gate::authorize('update', $content);
 
         if($content->isClean()) return true;
 

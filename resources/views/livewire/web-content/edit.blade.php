@@ -1,6 +1,6 @@
 <div class="p-10">
     <div class="flex w-full justify-between">
-        <h1 class="font-bold text-4xl">{{ __('About') }}</h1>
+        <h1 class="font-bold text-4xl">{{ $title }}</h1>
 
         {{-- Action group --}}
         <div class="flex items-center gap-4">
@@ -12,22 +12,22 @@
         <div class="space-y-2 py-4">
             <div class="flex flex-col max-w-xl">
                 <x-form.input-cluster
-                    name="about.head"
+                    name="webContent.head"
                     isRequired
                     :label="__('Title')"
                     :placeholder="__('Title')"
-                    wire:model="about.head"
+                    wire:model="webContent.head"
                 />
             </div>
         </div>
         <div class="space-y-2 py-4">
             <x-form.textarea-cluster
                 rows="15"
-                name="about.body"
+                name="webContent.body"
                 isRequired
                 :label="__('Content')"
                 :placeholder="__('About the company')"
-                wire:model="about.body"
+                wire:model="webContent.body"
             />
         </div>
     </div>

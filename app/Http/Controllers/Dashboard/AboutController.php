@@ -11,13 +11,23 @@ class AboutController extends Controller
 {
     public function index(): View
     {
+        $about = WebContent::firstWhere('key', 'about');
+
+        $this->authorize('view', $about);
+
         return view('dashboard.about.index', [
-            'about' => WebContent::firstWhere('key', 'about'),
+            'about' => $about,
         ]);
     }
 
     public function edit(): View
     {
-        return view('dashboard.about.edit');
+        $about = WebContent::firstWhere('key', 'about');
+
+        $this->authorize('update', $about);
+
+        return view('dashboard.about.edit', [
+            'about' => $about,
+        ]);
     }
 }

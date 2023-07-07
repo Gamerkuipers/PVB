@@ -20,12 +20,16 @@
             <x-slot:icon>
                 <x-icon.info/>
             </x-slot:icon>
-            <x-nav-link-dashboard route="dashboard.about.index">
-                {{ __('View') }}
-            </x-nav-link-dashboard>
-            <x-nav-link-dashboard route="dashboard.about.edit">
-                {{ __('Edit') }}
-            </x-nav-link-dashboard>
+            @can('view', $about)
+                <x-nav-link-dashboard route="dashboard.about.index">
+                    {{ __('View') }}
+                </x-nav-link-dashboard>
+            @endcan
+            @can('update', $about)
+                <x-nav-link-dashboard route="dashboard.about.edit">
+                    {{ __('Edit') }}
+                </x-nav-link-dashboard>
+            @endcan
         </x-nav-group-dashboard>
 
         <x-nav-group-dashboard :title="__('Contact')">

@@ -3,10 +3,12 @@
         <div class="flex w-full justify-between">
             <h1 class="font-bold text-4xl">{{ __('About') }}</h1>
 
-            {{-- Action group --}}
-            <a href="{{ route('dashboard.about.edit') }}">
-                <x-primary-button>{{ __('Edit') }}</x-primary-button>
-            </a>
+            @can('update', $about)
+                {{-- Action group --}}
+                <a href="{{ route('dashboard.about.edit') }}">
+                    <x-primary-button>{{ __('Edit') }}</x-primary-button>
+                </a>
+            @endcan
         </div>
         <div class=" w-fit">
             <div class="space-y-2 py-4">
