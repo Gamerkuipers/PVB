@@ -14,11 +14,13 @@
                 <x-form.checkbox wire:model="isSold"/>
                 {{ __('Is sold?') }}
             </div>
-            <x-form.input class="w-full"
-                          :placeholder="__('Titel')"
+            <x-form.input-cluster class="w-full"
+                            name="advertisement.description"
+                            isRequired
+                            :placeholder="__('Titel')"
+                            :label="__('Titel')"
                           wire:model="advertisement.description"
                           name="advertisement.description"/>
-            <x-form.error for="advertisement.description"></x-form.error>
         </div>
     </x-slot:description>
 
@@ -88,6 +90,7 @@
                               x-data
                               x-mask:dynamic="$money($input, ',')"
                               wire:model="advertisement.price"/>
+                *
             </div>
             <x-form.error for="advertisement.price"></x-form.error>
         </div>
@@ -97,6 +100,7 @@
         <div>
             <x-form.input-cluster name="advertisement.license_plate"
                                 wire:model.debounce.1s="advertisement.license_plate"
+                                isRequired
                                 :placeholder="__('License plate')"
                                 :label="__('License plate')"
                                 class="w-40 uppercase"

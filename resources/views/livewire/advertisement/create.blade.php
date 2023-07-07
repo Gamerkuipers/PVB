@@ -11,6 +11,7 @@
     {{-- content --}}
     <h1 class="font-bold text-2xl">
         <x-form.input-cluster name="title"
+                                isRequired
                               :placeholder="__('Title')"
                               :label="__('Title')"
                               wire:model="title"
@@ -39,6 +40,7 @@
                                   x-data
                                   x-mask:dynamic="$money($input, ',')"
                                   wire:model="price"/>
+                    *
                 </div>
 
                 <x-form.error for="price"></x-form.error>
@@ -78,6 +80,7 @@
     <div class="flex flex-col grow-0 w-fit">
         <x-form.input-cluster name="licensePlate"
                               class="w-40 uppercase"
+                              isRequired
                               wire:model.debounce.500ms="licensePlate"
                               :placeholder="__('License Plate')"
                               :label="__('License Plate')"/>

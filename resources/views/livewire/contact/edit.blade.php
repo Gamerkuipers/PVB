@@ -28,6 +28,7 @@
                 <x-form.input-cluster
                     name="newContactBody"
                     :label="__('Content')"
+                    isRequired
                     :placeholder="__('Content')"
                     wire:model="newContactBody"
                 />
@@ -58,6 +59,7 @@
                     <x-form.input-cluster
                         name="contacts.{{ $index }}.body"
                         :label="__('Content')"
+                        isRequired
                         :placeholder="__('Content')"
                         wire:model="contacts.{{ $index }}.body"
                     />
