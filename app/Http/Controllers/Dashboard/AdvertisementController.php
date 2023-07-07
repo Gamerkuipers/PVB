@@ -12,7 +12,7 @@ class AdvertisementController extends Controller
     public function index(): View
     {
         return view('dashboard.advertisement.index', [
-            'title' => 'All advertisements',
+            'title' => __('All advertisements'),
             'advertisements' => Advertisement::orderByDesc('created_at')->paginate(10),
         ]);
     }

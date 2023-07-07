@@ -50,6 +50,7 @@ class Edit extends Component
 
     protected $validationAttributes = [
         'advertisement.license_plate' => 'license plate',
+        'description' => 'title'
     ];
 
     protected $listeners = [
