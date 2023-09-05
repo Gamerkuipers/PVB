@@ -13,23 +13,11 @@ class WebContentSeeder extends Seeder
      */
     public function run(): void
     {
-        WebContent::create([
+        WebContent::updateorcreate([
             'key' => 'about',
-            'head' => 'Over het bedrijf',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Duis elementum risus urna, vel dapibus erat luctus in.
-            Suspendisse potenti. Aliquam erat volutpat.
-            Nam cursus lectus id nisi consequat, et scelerisque est pellentesque.
-            Morbi convallis elit quis magna scelerisque venenatis.
-            Aenean non ullamcorper mi, vel fringilla risus. Morbi lacinia,
-            sem in cursus dictum, lorem velit iaculis ligula,
-            rutrum ornare mi augue vel metus. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Nam aliquam ultrices magna sed
-            ullamcorper. Nunc urna neque, consectetur consectetur pellentesque
-            eu, convallis a mauris. Sed lacus dolor, vehicula in eleifend nec,
-            tempus ac magna. Curabitur tristique ligula nibh, vitae dictum enim
-            facilisis pharetra. Vestibulum maximus, dolor ut euismod efficitur,
-            purus orci molestie leo, et dapibus purus purus et nulla.',
+        ], [
+            'head' => 'Over ons',
+            'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et diam ac lacus sollicitudin iaculis. Curabitur dapibus dignissim nibh et viverra. Nulla augue justo, elementum sed sem non, posuere varius ante. Sed eget erat a risus hendrerit suscipit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ullamcorper sit amet elit nec volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec justo tortor, mollis sed blandit vel, aliquet vel metus. Fusce in faucibus nisl. Integer dignissim eget leo ut tincidunt. Mauris sit amet enim a quam faucibus tempor a vel eros.'
         ]);
     }
 }
